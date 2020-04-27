@@ -81,10 +81,6 @@ export default class DeliveryScene extends Phaser.Scene {
 
     //Vegetables
     this.tomato = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "tomato").setInteractive();
-    //this.tomato.setCollideWorldBounds(true);
-    //this.tomato.onWorldBounds = true;
-    
-    //this.tomato.setScale(1);
     this.input.setDraggable(this.tomato);
 
     this.input.dragDistanceThreshold = 16;
@@ -103,7 +99,6 @@ export default class DeliveryScene extends Phaser.Scene {
     gameObject.clearTint();
   });
 
-    //this.tomato = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "tomato");
     //this.carrot = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "carrot");
     //this.lettuce = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "lettuce");
     
@@ -116,17 +111,11 @@ export default class DeliveryScene extends Phaser.Scene {
     //this.watermelon = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "watermelon");
 
     //Meats
-    this.chicken = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "chicken").setInteractive();
-    //this.chicken.setCollideWorldBounds(true);
-    //this.chicken.onWorldBounds = true;
+    this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
     this.input.setDraggable(this.chicken);
-    this.bacon = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "bacon").setInteractive();
-    //this.bacon.setCollideWorldBounds(true);
-    //this.bacon.onWorldBounds = true;
+    this.bacon = this.physics.add.image(this.scale.width / 3 - 300, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
-   // this.ham.setCollideWorldBounds(true);
-   // this.ham.onWorldBounds = true;
     this.input.setDraggable(this.ham);
   
 
@@ -141,43 +130,12 @@ export default class DeliveryScene extends Phaser.Scene {
     //Other Food Related Items
     //this.cheese = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "cheese");
 
-
-    // either uncomment this and comment out collider stuff further down or leave it
-    /* this.input.on('pointerdown', this.startDrag, this);
-    this.physics.add.overlap(this.bag, this.chicken, this.eatFood, undefined, this); //eatfood->orderbag
-    this.physics.add.overlap(this.bag, this.bacon, this.eatFood, undefined, this);
-    this.physics.add.overlap(this.bag, this.ham, this.eatFood, undefined, this); */
-
     
     this.orderDone = false;
 
 
     let foodarr = [["chicken", "pollo", "poulet"], ["bacon", "tocino", "bacon"], ["ham", "jamon", "jambon"]];
     let randFood = foodarr[Math.floor(Math.random() * 3)];
-
-    // trying to group the images
-    /* let group = this.physics.add.group();
-    for(let i = 0; i < 3; i++){
-      let chicken = this.physics.add.sprite(this.scale.width / 2, this.scale.height / 2, "chicken").setInteractive();
-      let bacon = this.physics.add.sprite(this.scale.width / 2 - 500, this.scale.height / 2, "bacon").setInteractive();
-      let ham = this.physics.add.sprite(this.scale.width / 2 - 800, this.scale.height / 2, "ham").setInteractive();   
-      group.add(chicken);
-      group.add(bacon);
-      group.add(ham);
-      chicken.setCollideWorldBounds(true);
-      bacon.setCollideWorldBounds(true);
-      ham.setCollideWorldBounds(true);
-      group.setVelocityX(300);
-      group.setVelocityY(-300);
-      
-    }  */
-    
-    /* Phaser.Actions.Call(group.getChildren(), function(go) {
-      go.setVelocityX(100)
-    });*/
-
-    // group.getChildren() returns an array
-    //let randomSprite = Phaser.Utils.Array.GetRandom(group.getChildren());
 
 
     // dictionary?
@@ -231,20 +189,13 @@ export default class DeliveryScene extends Phaser.Scene {
 
     this.physics.add.overlap(this.bag, this.bacon, this.eatFood, undefined, this);
 
-    /*
-    
-https://phaser.io/tutorials/coding-tips-003
-
-    this.physics.arcade.collide(
-      this.food, this.conveyorbelt, 
-      this.setFriction, null, this
-  );*/
-
+    //testing a random function for order sheet
+    var orderFood = ["chicken", "ham", "tomato", "bacon"];
+    pick: function (orderFood){
+      return orderFood[this.integerInRange(0, orderFood.length - 1)];
+    }
   }
 
-  /*setFriction: function (food, conveyorbelt) {
-    food.body.x -= conveyorbelt.body.x - conveyorbelt.body.prev.x;
-  }*/
 
   moveChicken(chicken, speed){
     chicken.x += speed;
@@ -252,7 +203,6 @@ https://phaser.io/tutorials/coding-tips-003
       this.resetChicken(chicken);
     }
   }
-
   resetChicken(chicken){
     chicken.x = 0;
     let randomY = Phaser.Math.Between(800, 900);
@@ -264,7 +214,6 @@ https://phaser.io/tutorials/coding-tips-003
       this.resetHam(ham);
     }
   }
-
   resetHam(ham){
     ham.x = 0;
     let randomY = Phaser.Math.Between(800, 900);
@@ -281,10 +230,6 @@ https://phaser.io/tutorials/coding-tips-003
     bacon.x = 0;
     let randomY = Phaser.Math.Between(800, 900);
     bacon.y = randomY;
-  }
-
-  deleteFood(bag, food){
-    food.disableBody(true, true);
   }
 
 
