@@ -35,8 +35,11 @@ export default class DeliveryScene extends Phaser.Scene {
   private watermelon: food;
   private cheese: food; */
   private chicken: any;
+  private chickenText;
   private bacon: any;
+  private baconText;
   private ham: any;
+  private hamText;
   /* private soda: food;
   private tea: food;
   private coffee: food;
@@ -117,10 +120,13 @@ export default class DeliveryScene extends Phaser.Scene {
     //Meats
     this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
     this.input.setDraggable(this.chicken);
+    this.chickenText = this.add.text(0, 0, "chicken", {fill:"#000000", fontSize:"35px"});
     this.bacon = this.physics.add.image(this.scale.width / 3 - 300, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
+    this.baconText = this.add.text(0, 0, "bacon", {fill:"#000000", fontSize:"35px"});
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
     this.input.setDraggable(this.ham);
+    this.hamText = this.add.text(0, 0, "ham", {fill:"#000000", fontSize:"35px"});
   
 
 
@@ -195,11 +201,20 @@ export default class DeliveryScene extends Phaser.Scene {
 
     //testing a random function for order sheet
     var orderFood = ["chicken", "ham", "tomato", "bacon"];
-   /*  pick: function (orderFood){
-      return orderFood[this.integerInRange(0, orderFood.length - 1)];
-    } */
+    var orderFoodText = [this.chickenText, this.baconText, this.hamText];
+    Phaser.Math.RND.pick(orderFoodText);
   }
-
+  
+  iterFoodText(arr, size){
+    var x:number = 60;
+    for(var i:number = 0; i < size; i++){
+      var y:number = 100;
+      var temp:number = Phaser.Math.RND.pick(arr.length);
+      //how to overwrite x and y coordinates of the text?
+      delete arr[temp];
+      y += 50;
+    }
+  }
 
   moveChicken(chicken, speed){
     chicken.x += speed;
