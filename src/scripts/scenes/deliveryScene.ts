@@ -54,19 +54,23 @@ export default class DeliveryScene extends Phaser.Scene {
   cursorKeys;
   score: number;
   scoreLabel;
+  conveyor;
 
   constructor() {
     super({ key: 'DeliveryScene' });
   }
 
   create() {
-    
+    this.score = 0;
+    this.scoreLabel = this.add.bitmapText(500, 500, "pixelFont", "SCORE", 200);
+  
     //this.deliveryscene = this.add.image(0,0, "deliveryscene");
     //this.deliveryscene.setOrigin(0,0);
 
     this.orderscene = this.add.image(0,0, "orderscene");
     this.orderscene.setOrigin(0,0);
-  
+    this.conveyor = this.add.tileSprite(0, 750, 2600, 200, "conveyor");
+    this.conveyor.setOrigin(0,0);
     //Non-Food Related Items
     this.bag = this.physics.add.image(this.scale.width / 2 - 900, this.scale.height / 2 + 400, "bag");
     this.paper = this.add.image(200, 200, "paper");
@@ -191,9 +195,9 @@ export default class DeliveryScene extends Phaser.Scene {
 
     //testing a random function for order sheet
     var orderFood = ["chicken", "ham", "tomato", "bacon"];
-    pick: function (orderFood){
+   /*  pick: function (orderFood){
       return orderFood[this.integerInRange(0, orderFood.length - 1)];
-    }
+    } */
   }
 
 
@@ -236,8 +240,8 @@ export default class DeliveryScene extends Phaser.Scene {
   eatFood(bag, food){
     food.destroy(true); 
     //this.beamSound.play();
-    /* this.score += 5;
-    this.scoreLabel.text = "SCORE " + this.score; */
+    this.score += 5;
+    this.scoreLabel.text = "SCORE " + this.score;
   }
 
   startDrag(pointer, targets){
@@ -264,6 +268,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.moveHam(this.ham, 4);
     this.moveBacon(this.bacon, 4);
     this.movePlayerManager();
+    this.conveyor.tilePositionX -= 5;
   }
 
   movePlayerManager(){
