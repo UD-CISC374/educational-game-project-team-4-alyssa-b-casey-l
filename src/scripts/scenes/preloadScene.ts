@@ -4,11 +4,11 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-
+    this.load.bitmapFont("pixelFont", "assets/font/font.png","assets/font/font.xml");
     //Scenes
     this.load.image("deliveryscene", "assets/images/deliveryscene.png");
     this.load.image("orderscene", "assets/images/orderScene.png");
-
+    this.load.image("conveyor", "assets/images/conveyor.png");
     //Vegetables
     this.load.image("tomato", "assets/images/tomato.png");
     this.load.image("carrot", "assets/images/acarrot.png");
