@@ -1,17 +1,12 @@
 
 
-export default class Food extends Phaser.Physics.Arcade.Sprite {
-    body: Phaser.Physics.Arcade.Body;
-    score: number;
+export default class Food extends Phaser.Physics.Arcade.Image {
+    //body: Phaser.Physics.Arcade.Body;
 
     constructor(scene,x,y) {
         
-        super(scene, x, y, "enemy");
+        super(scene, x, y, "body");
         scene.add.existing(this);
-        scene.physics.world.enableBody(this);
-        //this.body.setAllowGravity(false);
-        this.body.velocity.x = -60;
-        this.score = 20;
         
     }
 
