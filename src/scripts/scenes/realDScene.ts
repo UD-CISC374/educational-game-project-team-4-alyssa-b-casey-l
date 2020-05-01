@@ -1,4 +1,21 @@
-//"realDScene line 1-18"
+/* import tomato from '../objects/tomato';
+import carrot from '../objects/carrot';
+import lettuce from '../objects/lettuce';
+import apple from '../objects/apple';
+import banana from '../objects/banana';
+import orange from '../objects/orange';
+import pineapple from '../objects/pineapple';
+import strawberry from '../objects/strawberry';
+import watermelon from '../objects/watermelon';
+import cheese from '../objects/cheese';
+import chicken from '../objects/chicken';
+import bacon from '../objects/bacon';
+import ham from '../objects/ham';
+import soda from '../objects/soda';
+import tea from '../objects/tea';
+import coffee from '../objects/coffee';
+import lemonade from '../objects/lemonade';
+import water from '../objects/water'; */
 import food from '../objects/food';
 import bag from '../objects/bag';
 import player from '../objects/player';
@@ -8,14 +25,26 @@ export default class DeliveryScene extends Phaser.Scene {
   private deliveryscene;
   private orderscene;
   private tomato: any;
-  //real DScene linesn28-36
+  /* private carrot: food;
+  private lettuce: food;
+  private apple: food;
+  private banana: food;
+  private orange: food;
+  private pineapple: food;
+  private strawberry: food;
+  private watermelon: food;
+  private cheese: food; */
   private chicken: any;
   private chickenText;
   private bacon: any;
   private baconText;
   private ham: any;
   private hamText;
-  //real DScene lines 43-47
+  /* private soda: food;
+  private tea: food;
+  private coffee: food;
+  private lemonade: food;
+  private water: food; */
   private bag: bag;
   private player;
   private paper: any;
@@ -38,7 +67,8 @@ export default class DeliveryScene extends Phaser.Scene {
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(500, 500, "pixelFont", "SCORE", 200);
   
-    //realDScene 70/71
+    //this.deliveryscene = this.add.image(0,0, "deliveryscene");
+    //this.deliveryscene.setOrigin(0,0);
 
     this.orderscene = this.add.image(0,0, "orderscene");
     this.orderscene.setOrigin(0,0);
@@ -76,7 +106,16 @@ export default class DeliveryScene extends Phaser.Scene {
     gameObject.clearTint();
   });
 
-    //realDscene 109-118
+    //this.carrot = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "carrot");
+    //this.lettuce = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "lettuce");
+    
+    //Fruits
+    //this.apple = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "apple");
+    //this.banana = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "banana");
+    //this.orange = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "orange");
+    //this.pineapple = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "pineapple");
+    //this.strawberry = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "strawberry");
+    //this.watermelon = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "watermelon");
 
     //Meats
     this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
@@ -91,7 +130,15 @@ export default class DeliveryScene extends Phaser.Scene {
   
 
 
-    //realDScene line 133-141
+    //Drinks
+    //this.soda = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "soda");
+    //this.coffee = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "coffee");
+    //this.tea = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "tea");
+    //this.lemonade = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "lemonade");
+    //this.water = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "water");
+
+    //Other Food Related Items
+    //this.cheese = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "cheese");
 
     
     this.orderDone = false;
@@ -101,8 +148,15 @@ export default class DeliveryScene extends Phaser.Scene {
     let randFood = foodarr[Math.floor(Math.random() * 3)];
 
 
-    //Dictionary Code
-    //realDscene 151-159
+    // dictionary?
+    let pictures = {'chicken': 'chicken.png', 'bacon': 'bacon.png', 'ham': 'ham.jpeg'}
+    let filename = pictures['chicken'];
+    /*with open(filename. 'rb') as f:
+      image = f.read()*/
+    for (var key in pictures){
+      var value = pictures[key];
+      //do something with value
+    }
 
 
     this.player = this.physics.add.sprite(this.scale.width / 2-8, this.scale.height - 64, "player");
