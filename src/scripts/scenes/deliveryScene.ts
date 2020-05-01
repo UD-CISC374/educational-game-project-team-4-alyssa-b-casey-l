@@ -46,8 +46,7 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   create() {
-    this.score = 0;
-    this.scoreLabel = this.add.bitmapText(500, 500, "pixelFont", "SCORE", 200);
+    
   
     //this.deliveryscene = this.add.image(0,0, "deliveryscene");
     //this.deliveryscene.setOrigin(0,0);
@@ -62,10 +61,13 @@ export default class DeliveryScene extends Phaser.Scene {
     this.paper = this.add.image(285, 300, "paper");
     this.paper.setScale(1.5);
     this.add.text(50,50, "Order:",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,150, "ham (jamón)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,200, "bacon (tocino)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60, 400, "drag the food into the bag to fulfill the order", {fill:"#000000", fontSize:"40px"})
+    this.add.text(65,102, "chicken (pollo)",{fill:"#000000", fontSize:"40px"});
+    this.add.text(65,152, "ham (jamón)",{fill:"#000000", fontSize:"40px"});
+    this.add.text(65,202, "bacon (tocino)",{fill:"#000000", fontSize:"40px"});
+    this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
+
+    this.score = 0;
+    this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
 
     this.foods = ["chicken", "ham", "bacon"];
     this.foodList = [];
