@@ -171,20 +171,9 @@ export default class DeliveryScene extends Phaser.Scene {
 
     var orderFoodText = [this.chickenText, this.baconText, this.hamText];
     Phaser.Math.RND.pick(orderFoodText);
-  }
   
-  iterFoodText(arr, size){
-    var x:number = 60;
-    for(var i:number = 0; i < size; i++){
-      var y:number = 100;
-      //recommending sort list randomly, iteratively placing first ith elements onto the screen
-      // google how to shuffle a list in phaser/js
-      var temp:number = Phaser.Math.RND.pick(arr.length);
-      //how to overwrite x and y coordinates of the text?
-      delete arr[temp];
-      y += 50;
-    }
-  }
+  
+
 
 
     // pausing the game
@@ -197,12 +186,27 @@ export default class DeliveryScene extends Phaser.Scene {
         resume.on('pointerdown', () => this.resumeButton());
   }
 
+
+
   pauseButton() {
     this.scene.pause('DeliveryScene');
   }
 
   resumeButton() {
     this.scene.resume('DeliveryScene');
+  }
+
+  iterFoodText(arr, size){
+    var x:number = 60;
+    for(var i:number = 0; i < size; i++){
+      var y:number = 100;
+      //recommending sort list randomly, iteratively placing first ith elements onto the screen
+      // google how to shuffle a list in phaser/js
+      var temp:number = Phaser.Math.RND.pick(arr.length);
+      //how to overwrite x and y coordinates of the text?
+      delete arr[temp];
+      y += 50;
+    }
   }
 
   //moves food across screen
