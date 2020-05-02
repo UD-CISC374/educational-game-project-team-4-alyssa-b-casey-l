@@ -1,4 +1,4 @@
-//"realDScene line 1-18"
+
 import food from '../objects/food';
 import bag from '../objects/bag';
 import player from '../objects/player';
@@ -7,6 +7,7 @@ import { GameObjects } from 'phaser';
 export default class DeliveryScene extends Phaser.Scene {
   private deliveryscene;
   private orderscene;
+
   private tomato: any;
   //real DScene linesn28-36
   private chicken: any;
@@ -25,6 +26,9 @@ export default class DeliveryScene extends Phaser.Scene {
   private foodList: any;
   private foodDragged: any;
   private order: any;
+  private table: any;
+  private checkmark: any;
+  private xmark: any;
   cursorKeys;
   score: number;
   scoreLabel;
@@ -35,30 +39,37 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   create() {
+
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(500, 500, "pixelFont", "SCORE", 200);
   
-    //realDScene 70/71
+
 
     this.orderscene = this.add.image(0,0, "orderscene");
     this.orderscene.setOrigin(0,0);
     this.conveyor = this.add.tileSprite(0, 750, 2600, 200, "conveyor");
     this.conveyor.setOrigin(0,0);
+    this.table = this.add.image(this.scale.width / 2 - 900, this.scale.height / 2 + 630, "table");
     //Non-Food Related Items
     this.bag = this.physics.add.image(this.scale.width / 2 - 900, this.scale.height / 2 + 400, "bag");
-    this.paper = this.add.image(200, 200, "paper");
+    this.paper = this.add.image(285, 300, "paper");
+    this.paper.setScale(1.5);
     this.add.text(50,50, "Order:",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,150, "ham (jamon)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,200, "bacon (tocino)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60, 400, "drag the food into the bag to fulfill the order", {fill:"#000000", fontSize:"40px"})
+    this.add.text(65,102, "chicken (pollo)",{fill:"#000000", fontSize:"40px"});
+    this.add.text(65,152, "ham (jamón)",{fill:"#000000", fontSize:"40px"});
+    this.add.text(65,202, "bacon (tocino)",{fill:"#000000", fontSize:"40px"});
+    this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
+
+    this.score = 0;
+    this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
 
     this.foods = ["chicken", "ham", "bacon"];
     this.foodList = [];
 
     //Vegetables
-    this.tomato = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "tomato").setInteractive();
+    this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
     this.input.setDraggable(this.tomato);
+
 
     this.input.dragDistanceThreshold = 16;
     
@@ -76,34 +87,45 @@ export default class DeliveryScene extends Phaser.Scene {
     gameObject.clearTint();
   });
 
-    //realDscene 109-118
+
 
     //Meats
     this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
     this.input.setDraggable(this.chicken);
+    this.chicken.setScale(0.5);
+    this.bacon = this.physics.add.image(this.scale.width / 3 - 50, this.scale.height / 2, "bacon").setInteractive();
     this.chickenText = this.add.text(0, 0, "chicken", {fill:"#000000", fontSize:"35px"});
     this.bacon = this.physics.add.image(this.scale.width / 3 - 300, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
     this.baconText = this.add.text(0, 0, "bacon", {fill:"#000000", fontSize:"35px"});
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
     this.input.setDraggable(this.ham);
+    this.ham.setScale(0.5);
     this.hamText = this.add.text(0, 0, "ham", {fill:"#000000", fontSize:"35px"});
+
+
+    // dragging code
+    this.input.dragDistanceThreshold = 16;
+    
+    this.input.on('dragstart', function (pointer, gameObject) {
+      //change this color later
+      gameObject.setTint(0xff0000);
+    });
   
+    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+    gameObject.x = dragX;
+    gameObject.y = dragY;
+    });
 
-
-    //realDScene line 133-141
-
+    this.input.on('dragend', function (pointer, gameObject) {
+    gameObject.clearTint();
+    });
     
     this.orderDone = false;
 
 
     let foodarr = [["chicken", "pollo", "poulet"], ["bacon", "tocino", "bacon"], ["ham", "jamon", "jambon"]];
     let randFood = foodarr[Math.floor(Math.random() * 3)];
-
-
-    //Dictionary Code
-    //realDscene 151-159
-
 
     this.player = this.physics.add.sprite(this.scale.width / 2-8, this.scale.height - 64, "player");
     this.player.setScale(10);
@@ -119,8 +141,7 @@ export default class DeliveryScene extends Phaser.Scene {
       repeat: -1
     });
 
-
-    // collisions that make everything freeze for some raison
+    // hard coded collisions
     this.physics.add.collider(this.bag, this.tomato, this.eatFood, function(bag, tomato){
       tomato.destroy(true);
     }, this);
@@ -147,6 +168,7 @@ export default class DeliveryScene extends Phaser.Scene {
 
     //testing a random function for order sheet
     var orderFood = ["chicken", "ham", "tomato", "bacon"];
+
     var orderFoodText = [this.chickenText, this.baconText, this.hamText];
     Phaser.Math.RND.pick(orderFoodText);
   }
@@ -164,42 +186,41 @@ export default class DeliveryScene extends Phaser.Scene {
     }
   }
 
-  moveChicken(chicken, speed){
-    chicken.x += speed;
-    if(chicken.x > 2500){
-      this.resetChicken(chicken);
-    }
+
+    // pausing the game
+    let pause = this.add.bitmapText(1600, 1500, "pixelFont", "PAUSE", 100);
+        pause.setInteractive({ useHandCursor: true });
+        pause.on('pointerdown', () => this.pauseButton());
+
+    let resume = this.add.bitmapText(1200, 1500, "pixelFont", "RESUME", 100);
+        resume.setInteractive({ useHandCursor: true });
+        resume.on('pointerdown', () => this.resumeButton());
   }
-  resetChicken(chicken){
-    chicken.x = 0;
-    let randomY = Phaser.Math.Between(800, 900);
-    chicken.y = randomY;
+
+  pauseButton() {
+    this.scene.pause('DeliveryScene');
   }
-  moveHam(ham, speed){
-    ham.x += speed;
-    if(ham.x > 2500){
-      this.resetHam(ham);
-    }
+
+  resumeButton() {
+    this.scene.resume('DeliveryScene');
   }
-  resetHam(ham){
-    ham.x = 0;
-    let randomY = Phaser.Math.Between(800, 900);
-    ham.y = randomY;
-  }
-  moveBacon(bacon, speed){
-    bacon.x += speed;
-    if(bacon.x > 2500){
-      this.resetChicken(bacon);
+
+  //moves food across screen
+  moveFood(food, speed){
+    food.x += speed;
+    if(food.x > 2500){
+      this.resetFood(food);
     }
   }
 
-  resetBacon(bacon){
-    bacon.x = 0;
-    let randomY = Phaser.Math.Between(800, 900);
-    bacon.y = randomY;
+  //puts food back to beginning
+  resetFood(food){
+    food.x = 0;
+    let randomY = Phaser.Math.Between(800, 850);
+    food.y = randomY;
   }
 
-
+  // destroys food that collides with bag
   eatFood(bag, food){
     food.destroy(true); 
     //this.beamSound.play();
@@ -227,9 +248,10 @@ export default class DeliveryScene extends Phaser.Scene {
 
 
   update() {
-    this.moveChicken(this.chicken, 4);
-    this.moveHam(this.ham, 4);
-    this.moveBacon(this.bacon, 4);
+    this.moveFood(this.chicken, 4);
+    this.moveFood(this.ham, 4);
+    this.moveFood(this.bacon, 4);
+    this.moveFood(this.tomato, 4);
     this.movePlayerManager();
     this.conveyor.tilePositionX -= 5;
   }

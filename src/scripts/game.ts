@@ -2,6 +2,7 @@ import 'phaser';
 import DeliveryScene from './scenes/deliveryScene';
 import PreloadScene from './scenes/preloadScene';
 import OrderScene from './scenes/orderScene';
+import TitleScene from './scenes/titleScene';
 import GameConfig = Phaser.Types.Core.GameConfig;
 
 const DEFAULT_WIDTH = 2560;
@@ -20,7 +21,7 @@ const config: GameConfig = {
     //This Works
     //scene: [PreloadScene, MainScene],
     //This Doesn't
-    scene: [PreloadScene, OrderScene, DeliveryScene],
+    scene: [TitleScene, PreloadScene, OrderScene, DeliveryScene],
     physics: {
         default: 'arcade',
         arcade: {

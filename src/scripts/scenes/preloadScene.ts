@@ -7,7 +7,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.bitmapFont("pixelFont", "assets/font/font.png","assets/font/font.xml");
     //Scenes
     this.load.image("deliveryscene", "assets/images/deliveryscene.png");
-    this.load.image("orderscene", "assets/images/orderScene.png");
+    this.load.image("orderscene", "assets/images/orderscene1.png");
     this.load.image("conveyor", "assets/images/conveyor.png");
     //Vegetables
     this.load.image("tomato", "assets/images/tomato.png");
@@ -23,9 +23,9 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("watermelon", "assets/images/watermelon.png");
 
     //Meats
-    this.load.image("chicken", "assets/images/chicken.png");
+    this.load.image("chicken", "assets/images/chicken1.png");
     this.load.image("bacon", "assets/images/bacon.png");
-    this.load.image("ham", "assets/images/ham.jpeg");
+    this.load.image("ham", "assets/images/ham1.png");
 
     //Drinks
     this.load.image("soda", "assets/images/soda.png");
@@ -42,6 +42,9 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("bag", "assets/images/bag.png");
     this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 16, frameHeight: 24});
     this.load.image("paper", "assets/images/paper.png");
+    this.load.image("table", "assets/images/table.png");
+    this.load.image("checkmark", "assets/images/checkmark.png");
+    this.load.image("xmark", "assets/images/x.png");
 
   }
 
