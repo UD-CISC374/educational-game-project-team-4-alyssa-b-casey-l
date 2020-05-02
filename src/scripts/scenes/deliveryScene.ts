@@ -155,6 +155,8 @@ export default class DeliveryScene extends Phaser.Scene {
     var x:number = 60;
     for(var i:number = 0; i < size; i++){
       var y:number = 100;
+      //recommending sort list randomly, iteratively placing first ith elements onto the screen
+      // google how to shuffle a list in phaser/js
       var temp:number = Phaser.Math.RND.pick(arr.length);
       //how to overwrite x and y coordinates of the text?
       delete arr[temp];
