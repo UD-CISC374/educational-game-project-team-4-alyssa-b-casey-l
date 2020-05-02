@@ -181,7 +181,7 @@ export default class DeliveryScene extends Phaser.Scene {
         pause.setInteractive({ useHandCursor: true });
         pause.on('pointerdown', () => this.pauseButton());
 
-    let resume = this.add.bitmapText(1600, 1500, "pixelFont", "RESUME", 100);
+    let resume = this.add.bitmapText(1200, 1500, "pixelFont", "RESUME", 100);
         resume.setInteractive({ useHandCursor: true });
         resume.on('pointerdown', () => this.resumeButton());
   }
