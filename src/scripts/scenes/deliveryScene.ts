@@ -64,6 +64,9 @@ export default class DeliveryScene extends Phaser.Scene {
     this.add.text(65,202, "bacon (tocino)",{fill:"#000000", fontSize:"40px"});
     this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
 
+    this.checkmark = this.add.image(60, 105, "checkmark");
+    this.checkmark.setScale(0.15);
+
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
 
@@ -130,7 +133,7 @@ export default class DeliveryScene extends Phaser.Scene {
     let randFood = foodarr[Math.floor(Math.random() * 3)];
 
     // player for delivery scene
-    this.player = this.physics.add.sprite(this.scale.width / 2-8, this.scale.height - 64, "player");
+    /* this.player = this.physics.add.sprite(this.scale.width / 2-8, this.scale.height - 64, "player");
     this.player.setScale(10);
     this.player.setGravity(0,0);
     this.player.play("thrust");
@@ -142,7 +145,7 @@ export default class DeliveryScene extends Phaser.Scene {
       frames: this.anims.generateFrameNumbers("player", {start: 0, end: 1}),
       frameRate: 20,
       repeat: -1
-    });
+    }); */
 
     // hard coded collisions
     this.physics.add.collider(this.bag, this.tomato, this.eatFood, function(bag, tomato){
@@ -241,28 +244,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.moveFood(this.ham, 4);
     this.moveFood(this.bacon, 4);
     this.moveFood(this.tomato, 4);
-    this.movePlayerManager();
     this.conveyor.tilePositionX -= 5;
   }
-
-  movePlayerManager(){
-    
-    if(this.cursorKeys.left.isDown){
-      this.player.setVelocityX(-300);
-    }
-    else if(this.cursorKeys.right.isDown){
-      this.player.setVelocityX(300);
-    }
-    else this.player.setVelocityX(0);
-
-    if(this.cursorKeys.up.isDown){
-      this.player.setVelocityY(-300);
-    }
-    else if(this.cursorKeys.down.isDown){
-      this.player.setVelocityY(300);
-    }
-    else this.player.setVelocityY(0);
-  }
-
 
 }
