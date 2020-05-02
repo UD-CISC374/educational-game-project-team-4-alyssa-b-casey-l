@@ -4,6 +4,7 @@ import bag from '../objects/bag';
 import player from '../objects/player';
 import { GameObjects } from 'phaser';
 
+
 export default class DeliveryScene extends Phaser.Scene {
   private deliveryscene;
   private orderscene;
@@ -197,14 +198,13 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   iterFoodText(arr, size){
-    var x:number = 60;
+    let x:number = 60;
+    let y: number = 100;
     for(var i:number = 0; i < size; i++){
-      var y:number = 100;
+      Phaser.Utils.Array.Shuffle(arr);
       //recommending sort list randomly, iteratively placing first ith elements onto the screen
       // google how to shuffle a list in phaser/js
-      var temp:number = Phaser.Math.RND.pick(arr.length);
       //how to overwrite x and y coordinates of the text?
-      delete arr[temp];
       y += 50;
     }
   }
