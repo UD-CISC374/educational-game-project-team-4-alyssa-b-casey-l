@@ -7,23 +7,12 @@ export default class DeliveryScene extends Phaser.Scene {
   private deliveryscene;
   private orderscene;
   private tomato: food;
-  private carrot: food;
-  private lettuce: food;
-  private apple: food;
-  private banana: food;
-  private orange: food;
-  private pineapple: food;
-  private strawberry: food;
-  private watermelon: food;
-  private cheese: food;
   private chicken: food;
+  private chickenText;
   private bacon: food;
+  private baconText;
   private ham: food;
-  private soda: food;
-  private tea: food;
-  private coffee: food;
-  private lemonade: food;
-  private water: food;
+  private hamText;
   private bag: bag;
   private player;
   private paper: any;
@@ -46,9 +35,6 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   create() {
-    //this.deliveryscene = this.add.image(0,0, "deliveryscene");
-    //this.deliveryscene.setOrigin(0,0);
-
     this.orderscene = this.add.image(0,0, "orderscene");
     this.orderscene.setOrigin(0,0);
     this.conveyor = this.add.tileSprite(0, 750, 2600, 200, "conveyor");
@@ -77,36 +63,19 @@ export default class DeliveryScene extends Phaser.Scene {
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
     this.input.setDraggable(this.tomato);
 
-    //this.carrot = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "carrot");
-    //this.lettuce = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "lettuce");
-    
-    //Fruits
-    //this.apple = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "apple");
-    //this.banana = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "banana");
-    //this.orange = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "orange");
-    //this.pineapple = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "pineapple");
-    //this.strawberry = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "strawberry");
-    //this.watermelon = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "watermelon");
-
     //Meats
     this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
     this.input.setDraggable(this.chicken);
     this.chicken.setScale(0.5);
     this.bacon = this.physics.add.image(this.scale.width / 3 - 50, this.scale.height / 2, "bacon").setInteractive();
+    this.chickenText = this.add.text(0, 0, "chicken", {fill:"#000000", fontSize:"35px"});
+    this.bacon = this.physics.add.image(this.scale.width / 3 - 300, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
+    this.baconText = this.add.text(0, 0, "bacon", {fill:"#000000", fontSize:"35px"});
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
     this.input.setDraggable(this.ham);
     this.ham.setScale(0.5);
-  
-    //Drinks
-    //this.soda = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "soda");
-    //this.coffee = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "coffee");
-    //this.tea = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "tea");
-    //this.lemonade = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "lemonade");
-    //this.water = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "water");
-
-    //Other Food Related Items
-    //this.cheese = this.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "cheese");
+    this.hamText = this.add.text(0, 0, "ham", {fill:"#000000", fontSize:"35px"});
 
 
     // dragging code
@@ -118,12 +87,12 @@ export default class DeliveryScene extends Phaser.Scene {
     });
   
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-    gameObject.x = dragX;
-    gameObject.y = dragY;
+      gameObject.x = dragX;
+      gameObject.y = dragY;
     });
 
     this.input.on('dragend', function (pointer, gameObject) {
-    gameObject.clearTint();
+      gameObject.clearTint();
     });
     
     this.orderDone = false;
@@ -131,21 +100,6 @@ export default class DeliveryScene extends Phaser.Scene {
 
     let foodarr = [["chicken", "pollo", "poulet"], ["bacon", "tocino", "bacon"], ["ham", "jamon", "jambon"]];
     let randFood = foodarr[Math.floor(Math.random() * 3)];
-
-    // player for delivery scene
-    /* this.player = this.physics.add.sprite(this.scale.width / 2-8, this.scale.height - 64, "player");
-    this.player.setScale(10);
-    this.player.setGravity(0,0);
-    this.player.play("thrust");
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.player.setCollideWorldBounds(true);
-
-    this.anims.create({
-      key: "thrust",
-      frames: this.anims.generateFrameNumbers("player", {start: 0, end: 1}),
-      frameRate: 20,
-      repeat: -1
-    }); */
 
     // hard coded collisions
     this.physics.add.collider(this.bag, this.tomato, this.eatFood, function(bag, tomato){
@@ -174,10 +128,9 @@ export default class DeliveryScene extends Phaser.Scene {
 
     //testing a random function for order sheet
     var orderFood = ["chicken", "ham", "tomato", "bacon"];
-   /*  pick: function (orderFood){
-      return orderFood[this.integerInRange(0, orderFood.length - 1)];
-    } */
 
+    var orderFoodText = [this.chickenText, this.baconText, this.hamText];
+    Phaser.Math.RND.pick(orderFoodText);
 
     // pausing the game
     let pause = this.add.bitmapText(1600, 1500, "pixelFont", "PAUSE", 100);
@@ -195,6 +148,18 @@ export default class DeliveryScene extends Phaser.Scene {
 
   resumeButton() {
     this.scene.resume('DeliveryScene');
+  }
+
+  iterFoodText(arr, size){
+    let x:number = 60;
+    let y: number = 100;
+    for(var i:number = 0; i < size; i++){
+      Phaser.Utils.Array.Shuffle(arr);
+      //recommending sort list randomly, iteratively placing first ith elements onto the screen
+      // google how to shuffle a list in phaser/js
+      //how to overwrite x and y coordinates of the text?
+      y += 50;
+    }
   }
 
   //moves food across screen
