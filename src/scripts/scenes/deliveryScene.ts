@@ -46,8 +46,6 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   create() {
-    
-  
     //this.deliveryscene = this.add.image(0,0, "deliveryscene");
     //this.deliveryscene.setOrigin(0,0);
 
@@ -176,6 +174,24 @@ export default class DeliveryScene extends Phaser.Scene {
    /*  pick: function (orderFood){
       return orderFood[this.integerInRange(0, orderFood.length - 1)];
     } */
+
+
+    // pausing the game
+    let pause = this.add.bitmapText(1600, 1500, "pixelFont", "PAUSE", 100);
+        pause.setInteractive({ useHandCursor: true });
+        pause.on('pointerdown', () => this.pauseButton());
+
+    let resume = this.add.bitmapText(1600, 1500, "pixelFont", "RESUME", 100);
+        resume.setInteractive({ useHandCursor: true });
+        resume.on('pointerdown', () => this.resumeButton());
+  }
+
+  pauseButton() {
+    this.scene.pause('DeliveryScene');
+  }
+
+  resumeButton() {
+    this.scene.resume('DeliveryScene');
   }
 
   //moves food across screen
