@@ -1,4 +1,3 @@
-
 import food from '../objects/food';
 import bag from '../objects/bag';
 import player from '../objects/player';
@@ -6,20 +5,16 @@ import { GameObjects } from 'phaser';
 import {Entry} from '../objects/entry';
 import {Dictionary} from '../objects/dictionary';
 
-
 export default class DeliveryScene extends Phaser.Scene {
   private deliveryscene;
   private orderscene;
-
-  private tomato: any;
-  //real DScene linesn28-36
-  private chicken: any;
+  private tomato: food;
+  private chicken: food;
   private chickenText;
-  private bacon: any;
+  private bacon: food;
   private baconText;
-  private ham: any;
+  private ham: food;
   private hamText;
-  //real DScene lines 43-47
   private bag: bag;
   private player;
   private paper: any;
@@ -46,12 +41,6 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   create() {
-
-    this.score = 0;
-    this.scoreLabel = this.add.bitmapText(500, 500, "pixelFont", "SCORE", 200);
-  
-
-
     this.orderscene = this.add.image(0,0, "orderscene");
     this.orderscene.setOrigin(0,0);
     this.conveyor = this.add.tileSprite(0, 750, 2600, 200, "conveyor");
@@ -63,6 +52,9 @@ export default class DeliveryScene extends Phaser.Scene {
     this.paper.setScale(1.5);
     this.add.text(50,50, "Order:",{fill:"#000000", fontSize:"40px"});
     this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
+
+    this.checkmark = this.add.image(60, 105, "checkmark");
+    this.checkmark.setScale(0.15);
 
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
@@ -120,12 +112,12 @@ export default class DeliveryScene extends Phaser.Scene {
     });
   
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-    gameObject.x = dragX;
-    gameObject.y = dragY;
+      gameObject.x = dragX;
+      gameObject.y = dragY;
     });
 
     this.input.on('dragend', function (pointer, gameObject) {
-    gameObject.clearTint();
+      gameObject.clearTint();
     });
     
     this.orderDone = false;
@@ -181,8 +173,6 @@ export default class DeliveryScene extends Phaser.Scene {
 
 
   }
-
-
 
   pauseButton() {
     this.scene.pause('DeliveryScene');
@@ -267,25 +257,5 @@ export default class DeliveryScene extends Phaser.Scene {
     this.conveyor.tilePositionX -= 5;
     this.iterFoodText(this.orderFoodText, 3);
   }
-
-  movePlayerManager(){
-    
-    if(this.cursorKeys.left.isDown){
-      this.player.setVelocityX(-300);
-    }
-    else if(this.cursorKeys.right.isDown){
-      this.player.setVelocityX(300);
-    }
-    else this.player.setVelocityX(0);
-
-    if(this.cursorKeys.up.isDown){
-      this.player.setVelocityY(-300);
-    }
-    else if(this.cursorKeys.down.isDown){
-      this.player.setVelocityY(300);
-    }
-    else this.player.setVelocityY(0);
-  }
-
 
 }
