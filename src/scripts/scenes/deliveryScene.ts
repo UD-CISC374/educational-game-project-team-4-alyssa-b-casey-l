@@ -30,10 +30,12 @@ export default class DeliveryScene extends Phaser.Scene {
   private table: any;
   private checkmark: any;
   private xmark: any;
+  orderFoodText;
   cursorKeys;
   score: number;
   scoreLabel;
   conveyor;
+  orderFood: string[];
 
   constructor() {
     super({ key: 'DeliveryScene' });
@@ -56,9 +58,6 @@ export default class DeliveryScene extends Phaser.Scene {
     this.paper = this.add.image(285, 300, "paper");
     this.paper.setScale(1.5);
     this.add.text(50,50, "Order:",{fill:"#000000", fontSize:"40px"});
-    this.add.text(65,102, "chicken (pollo)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(65,152, "ham (jamón)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(65,202, "bacon (tocino)",{fill:"#000000", fontSize:"40px"});
     this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
 
     this.score = 0;
@@ -168,10 +167,9 @@ export default class DeliveryScene extends Phaser.Scene {
     this.physics.add.overlap(this.bag, this.bacon, this.eatFood, undefined, this);
 
     //testing a random function for order sheet
-    var orderFood = ["chicken", "ham", "tomato", "bacon"];
+    this.orderFood = ["chicken", "ham", "tomato", "bacon"];
 
-    var orderFoodText = [this.chickenText, this.baconText, this.hamText];
-    Phaser.Math.RND.pick(orderFoodText);
+    this.orderFoodText = [this.chickenText, this.baconText, this.hamText];
   
   
 
@@ -179,12 +177,14 @@ export default class DeliveryScene extends Phaser.Scene {
 
     // pausing the game
     let pause = this.add.bitmapText(1600, 1500, "pixelFont", "PAUSE", 100);
-        pause.setInteractive({ useHandCursor: true });
-        pause.on('pointerdown', () => this.pauseButton());
+    pause.setInteractive({ useHandCursor: true });
+    pause.on('pointerdown', () => this.pauseButton());
 
     let resume = this.add.bitmapText(1200, 1500, "pixelFont", "RESUME", 100);
-        resume.setInteractive({ useHandCursor: true });
-        resume.on('pointerdown', () => this.resumeButton());
+    resume.setInteractive({ useHandCursor: true });
+    resume.on('pointerdown', () => this.resumeButton());
+
+
   }
 
 
@@ -198,13 +198,12 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   iterFoodText(arr, size){
-    let x:number = 60;
+    let x: number = 65;
     let y: number = 100;
     for(var i:number = 0; i < size; i++){
       Phaser.Utils.Array.Shuffle(arr);
-      //recommending sort list randomly, iteratively placing first ith elements onto the screen
-      // google how to shuffle a list in phaser/js
-      //how to overwrite x and y coordinates of the text?
+      arr[i].x = x;
+      arr[i].y = y;
       y += 50;
     }
   }
@@ -258,6 +257,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.moveFood(this.tomato, 4);
     this.movePlayerManager();
     this.conveyor.tilePositionX -= 5;
+    this.iterFoodText(this.orderFoodText, 3);
   }
 
   movePlayerManager(){
