@@ -130,7 +130,7 @@ export default class DeliveryScene extends Phaser.Scene {
 
     // creating the foodtext array to print, and randomizing it?
     this.orderFoodText = [this.chickenText, this.baconText, this.hamText];
-    this.orderFoodText = Phaser.Math.RND.pick(this.orderFoodText);
+    //this.orderFoodText = Phaser.Math.RND.pick(this.orderFoodText);
 
     // pausing the game
     let pause = this.add.bitmapText(1600, 1500, "pixelFont", "PAUSE", 100);
@@ -151,12 +151,12 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   iterFoodText(arr, size){
-    arr = this.orderFoodText;
-    size = arr.length();
-    let x:number = 60;
+    let x: number = 65;
     let y: number = 100;
     for(var i:number = 0; i < size; i++){
       Phaser.Utils.Array.Shuffle(arr);
+      arr[i].x = x;
+      arr[i].y = y;
       //recommending sort list randomly, iteratively placing first ith elements onto the screen
       // google how to shuffle a list in phaser/js
       //how to overwrite x and y coordinates of the text?
@@ -193,6 +193,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.moveFood(this.bacon, 4);
     this.moveFood(this.tomato, 4);
     this.conveyor.tilePositionX -= 4;
+    this.iterFoodText(this.orderFoodText, 3);
   }
 
 }
