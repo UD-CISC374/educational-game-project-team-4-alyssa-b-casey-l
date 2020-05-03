@@ -3,6 +3,8 @@ import food from '../objects/food';
 import bag from '../objects/bag';
 import player from '../objects/player';
 import { GameObjects } from 'phaser';
+import {Entry} from '../objects/entry';
+import {Dictionary} from '../objects/dictionary';
 
 
 export default class DeliveryScene extends Phaser.Scene {
@@ -36,9 +38,11 @@ export default class DeliveryScene extends Phaser.Scene {
   scoreLabel;
   conveyor;
   orderFood: string[];
+  
 
   constructor() {
     super({ key: 'DeliveryScene' });
+    
   }
 
   create() {
@@ -69,7 +73,9 @@ export default class DeliveryScene extends Phaser.Scene {
     //Vegetables
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
     this.input.setDraggable(this.tomato);
-
+    let dictionary = new Dictionary();
+    //this is broken
+    dictionary.addEntry("tomato", "tomate", "tomate", "tomato");
 
     this.input.dragDistanceThreshold = 16;
     
@@ -93,16 +99,17 @@ export default class DeliveryScene extends Phaser.Scene {
     this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
     this.input.setDraggable(this.chicken);
     this.chicken.setScale(0.5);
-    this.bacon = this.physics.add.image(this.scale.width / 3 - 50, this.scale.height / 2, "bacon").setInteractive();
+    dictionary.addEntry("chicken", "pollo", "poulette", "chicken");
     this.chickenText = this.add.text(0, 0, "chicken", {fill:"#000000", fontSize:"35px"});
     this.bacon = this.physics.add.image(this.scale.width / 3 - 300, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
     this.baconText = this.add.text(0, 0, "bacon", {fill:"#000000", fontSize:"35px"});
+    dictionary.addEntry("bacon", "tocino", "bacon", "bacon");
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
     this.input.setDraggable(this.ham);
     this.ham.setScale(0.5);
     this.hamText = this.add.text(0, 0, "ham", {fill:"#000000", fontSize:"35px"});
-
+    dictionary.addEntry("ham", "jamon", "jambon", "ham");
 
     // dragging code
     this.input.dragDistanceThreshold = 16;
@@ -127,19 +134,7 @@ export default class DeliveryScene extends Phaser.Scene {
     let foodarr = [["chicken", "pollo", "poulet"], ["bacon", "tocino", "bacon"], ["ham", "jamon", "jambon"]];
     let randFood = foodarr[Math.floor(Math.random() * 3)];
 
-    this.player = this.physics.add.sprite(this.scale.width / 2-8, this.scale.height - 64, "player");
-    this.player.setScale(10);
-    this.player.setGravity(0,0);
-    this.player.play("thrust");
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.player.setCollideWorldBounds(true);
-
-    this.anims.create({
-      key: "thrust",
-      frames: this.anims.generateFrameNumbers("player", {start: 0, end: 1}),
-      frameRate: 20,
-      repeat: -1
-    });
+   
 
     // hard coded collisions
     this.physics.add.collider(this.bag, this.tomato, this.eatFood, function(bag, tomato){
@@ -168,8 +163,8 @@ export default class DeliveryScene extends Phaser.Scene {
 
     //testing a random function for order sheet
     this.orderFood = ["chicken", "ham", "tomato", "bacon"];
-
     this.orderFoodText = [this.chickenText, this.baconText, this.hamText];
+
   
   
 
@@ -202,9 +197,23 @@ export default class DeliveryScene extends Phaser.Scene {
     let y: number = 100;
     for(var i:number = 0; i < size; i++){
       Phaser.Utils.Array.Shuffle(arr);
-      arr[i].x = x;
+      arr[i].x = 0;
       arr[i].y = y;
       y += 50;
+    }
+  }
+
+  iterFoodImage(arr){
+    let x: number = 0;
+    let y: number = 0;
+    for(var i:number = 0; i <= arr.length; i++){
+      Phaser.Utils.Array.Shuffle(arr);
+      arr[i].x = 0;
+      arr[i].y = Phaser.Math.Between(800, 850);
+      this.moveFood(arr[i], 5);
+      if(arr[i].x == 50){
+        i++;
+      }
     }
   }
 
@@ -255,7 +264,6 @@ export default class DeliveryScene extends Phaser.Scene {
     this.moveFood(this.ham, 4);
     this.moveFood(this.bacon, 4);
     this.moveFood(this.tomato, 4);
-    this.movePlayerManager();
     this.conveyor.tilePositionX -= 5;
     this.iterFoodText(this.orderFoodText, 3);
   }
