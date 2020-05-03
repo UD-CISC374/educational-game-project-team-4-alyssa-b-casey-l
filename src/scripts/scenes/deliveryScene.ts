@@ -67,7 +67,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.input.setDraggable(this.tomato);
     let dictionary = new Dictionary();
     //this is broken
-    dictionary.addEntry("tomato", "tomate", "tomate", "tomato");
+    //dictionary.addEntry("tomato", "tomate", "tomate", "tomato");
 
     this.input.dragDistanceThreshold = 16;
     
@@ -91,17 +91,17 @@ export default class DeliveryScene extends Phaser.Scene {
     this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
     this.input.setDraggable(this.chicken);
     this.chicken.setScale(0.5);
-    dictionary.addEntry("chicken", "pollo", "poulette", "chicken");
+    //dictionary.addEntry("chicken", "pollo", "poulette", "chicken");
     this.chickenText = this.add.text(0, 0, "chicken", {fill:"#000000", fontSize:"35px"});
     this.bacon = this.physics.add.image(this.scale.width / 3 - 300, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
     this.baconText = this.add.text(0, 0, "bacon", {fill:"#000000", fontSize:"35px"});
-    dictionary.addEntry("bacon", "tocino", "bacon", "bacon");
+    //dictionary.addEntry("bacon", "tocino", "bacon", "bacon");
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
     this.input.setDraggable(this.ham);
     this.ham.setScale(0.5);
     this.hamText = this.add.text(0, 0, "ham", {fill:"#000000", fontSize:"35px"});
-    dictionary.addEntry("ham", "jamon", "jambon", "ham");
+    //dictionary.addEntry("ham", "jamon", "jambon", "ham");
 
     // dragging code
     this.input.dragDistanceThreshold = 16;
@@ -186,8 +186,8 @@ export default class DeliveryScene extends Phaser.Scene {
     let x: number = 65;
     let y: number = 100;
     for(var i:number = 0; i < size; i++){
-      Phaser.Utils.Array.Shuffle(arr);
-      arr[i].x = 0;
+      //Phaser.Utils.Array.Shuffle(arr);
+      arr[i].x = x;
       arr[i].y = y;
       y += 50;
     }
@@ -255,6 +255,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.moveFood(this.bacon, 4);
     this.moveFood(this.tomato, 4);
     this.conveyor.tilePositionX -= 5;
+    //Phaser.Utils.Array.Shuffle(this.orderFoodText);
     this.iterFoodText(this.orderFoodText, 3);
   }
 
