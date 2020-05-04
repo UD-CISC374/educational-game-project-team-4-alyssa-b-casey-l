@@ -114,7 +114,7 @@ export default class DeliveryScene extends Phaser.Scene {
 
     // hard coded collisions
     this.physics.add.collider(this.bag, this.tomato, this.eatFood, function(bag, tomato){
-      tomato.destroy(true);
+      tomato.destroy(false);
     }, this);
 
     this.physics.add.overlap(this.bag, this.tomato, this.eatFood, undefined, this);
@@ -221,16 +221,19 @@ export default class DeliveryScene extends Phaser.Scene {
 
   orderBag(bag, food){
     if (food == this.chicken){
-      this.order = "chicken";
-      if (this.foods.indexOf(this.order) != -1){
         this.chicken.disableBody(true, true);
         this.checkmark.setAlpha(1.0);
-        this.foodList.push("chicken");
-      }
-      else{
-        this.chicken.setX(200);
-        this.chicken.setY(60);
-      }
+    }
+    else if( food == this.ham){
+      this.ham.disableBody(true, true);
+        this.checkmark.setAlpha(1.0);
+    }
+    else if(food == this.bacon){
+      this.bacon.disableBody(true, true);
+        this.checkmark.setAlpha(1.0);
+    }
+    else{
+      this.resetFood(food);
     }
   }
 
