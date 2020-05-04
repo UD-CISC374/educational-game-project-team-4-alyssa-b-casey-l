@@ -36,6 +36,7 @@ export default class DeliveryScene extends Phaser.Scene {
   private level: any;
   orderFood: string[];
   tomatoText: GameObjects.Text;
+  dictionary;
 
   constructor() {
     super({ key: 'DeliveryScene' });
@@ -53,9 +54,9 @@ export default class DeliveryScene extends Phaser.Scene {
     this.paper = this.add.image(285, 300, "paper");
     this.paper.setScale(1.5);
     this.add.text(50,50, "Order:",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,150, "ham (jamon)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,200, "bacon (tocino)",{fill:"#000000", fontSize:"35px"});
+    //this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"35px"});
+    //this.add.text(60,150, "ham (jamon)",{fill:"#000000", fontSize:"35px"});
+    //this.add.text(60,200, "bacon (tocino)",{fill:"#000000", fontSize:"35px"});
     this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
 
     this.checkmark1 = this.add.image(60, 105, "checkmark");
@@ -75,8 +76,8 @@ export default class DeliveryScene extends Phaser.Scene {
     //Vegetables
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
     this.input.setDraggable(this.tomato);
-    //this.tomatoText = this.add.text(0, 0, "tomato\n", {fill:"#000000", fontSize:"35px"});
-    let dictionary = new Dictionary();
+    this.tomatoText = this.add.text(0, 0, "tomato\n", {fill:"#000000", fontSize:"35px"});
+    this.dictionary = new Dictionary();
     //this is broken
     //dictionary.addEntry("tomato", "tomate", "tomate", "tomato");
 
@@ -85,15 +86,19 @@ export default class DeliveryScene extends Phaser.Scene {
     this.input.setDraggable(this.chicken);
     this.chicken.setScale(0.5);
     //dictionary.addEntry("chicken", "pollo", "poulette", "chicken");
-   // this.chickenText = this.add.text(0, 0, "chicken\n", {fill:"#000000", fontSize:"35px"});
+    this.chickenText = this.add.text(0, 0, "chicken\n", {fill:"#000000", fontSize:"35px"});
+    //there is a field called "setVisible we should invest time into"
+
+
+
     this.bacon = this.physics.add.image(this.scale.width / 3 - 50, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
-    //this.baconText = this.add.text(0, 0, "bacon\n", {fill:"#000000", fontSize:"35px"});
+    this.baconText = this.add.text(0, 0, "bacon\n", {fill:"#000000", fontSize:"35px"});
     //dictionary.addEntry("bacon", "tocino", "bacon", "bacon");
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
     this.input.setDraggable(this.ham);
     this.ham.setScale(0.5);
-    //this.hamText = this.add.text(0, 0, "ham\n", {fill:"#000000", fontSize:"35px"});
+    this.hamText = this.add.text(0, 0, "ham\n", {fill:"#000000", fontSize:"35px"});
     //dictionary.addEntry("ham", "jamon", "jambon", "ham");
 
     // dragging code
@@ -149,7 +154,7 @@ export default class DeliveryScene extends Phaser.Scene {
     //testing a random function for order sheet
     this.orderFood = ["chicken", "ham", "tomato", "bacon"];
     
-    //this.orderFoodText = [this.chickenText, this.baconText, this.hamText, this.tomatoText];
+    this.orderFoodText = [this.chickenText, this.baconText, this.hamText, this.tomatoText];
 
   
   
@@ -164,7 +169,7 @@ export default class DeliveryScene extends Phaser.Scene {
     let resume = this.add.bitmapText(1200, 1500, "pixelFont", "RESUME", 100);
     resume.setInteractive({ useHandCursor: true });
     resume.on('pointerdown', () => this.resumeButton());
-
+    this.iterFoodText(this.orderFoodText, 3);
 
   }
 
@@ -179,15 +184,12 @@ export default class DeliveryScene extends Phaser.Scene {
   iterFoodText(arr, size){
     let x: number = 65;
     let y: number = 100;
-    
+    Phaser.Utils.Array.Shuffle(arr);
     for(var i:number = 0; i < size; i++){
-      Phaser.Utils.Array.Shuffle(arr);
       arr[i].x = x;
       arr[i].y = y;
-      //arr[i + 1].y += 50;
-      
+      arr[i + 1].y += 50;
       y += 50;
-      return arr;
     }
   }
 
@@ -258,7 +260,6 @@ export default class DeliveryScene extends Phaser.Scene {
     this.moveFood(this.bacon, 4);
     this.moveFood(this.tomato, 4);
     this.conveyor.tilePositionX -= 4;
-    //this.iterFoodText(this.orderFoodText, 1);
   }
 
 }

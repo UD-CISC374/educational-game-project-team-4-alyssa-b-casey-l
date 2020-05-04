@@ -5,7 +5,10 @@ export class Dictionary {
     spanish: {[key: string]: Entry}
     texture: {[key: string]: Entry}
     constructor() {
-        this.french = {}; // etc.
+        this.english = {};
+        this.spanish = {};
+        this.french = {};
+        this.texture = {};
     }
     addEntry(e: string, s: string, f: string, t: string) {
         let newEntry = new Entry(e, s, f, t);
