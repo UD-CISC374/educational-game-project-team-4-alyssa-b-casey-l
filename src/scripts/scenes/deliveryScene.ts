@@ -113,29 +113,29 @@ export default class DeliveryScene extends Phaser.Scene {
    
 
     // hard coded collisions
-    this.physics.add.collider(this.bag, this.tomato, this.eatFood, function(bag, tomato){
-      tomato.destroy(true);
-    }, this);
+     this.physics.add.collider(this.bag, this.tomato, this.orderBag, function(bag, tomato){
+       null;
+     }, this);
 
-    this.physics.add.overlap(this.bag, this.tomato, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.tomato, this.orderBag, undefined, this);
 
-    this.physics.add.collider(this.bag, this.chicken, this.eatFood, function(bag, chicken){
+    this.physics.add.collider(this.bag, this.chicken, this.orderBag, function(bag, chicken){
       chicken.destroy(true);
     }, this);
 
-    this.physics.add.overlap(this.bag, this.chicken, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.chicken, this.orderBag, undefined, this);
 
-    this.physics.add.collider(this.bag, this.ham, this.eatFood, function(bag, ham){
+    this.physics.add.collider(this.bag, this.ham, this.orderBag, function(bag, ham){
       ham.destroy(true);
     }, this);
 
-    this.physics.add.overlap(this.bag, this.ham, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.ham, this.orderBag, undefined, this);
 
-    this.physics.add.collider(this.bag, this.bacon, this.eatFood, function(bag, bacon){
+    this.physics.add.collider(this.bag, this.bacon, this.orderBag, function(bag, bacon){
       bacon.destroy(true);
     }, this);
 
-    this.physics.add.overlap(this.bag, this.bacon, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.bacon, this.orderBag, undefined, this);
 
     //testing a random function for order sheet
     this.orderFood = ["chicken", "ham", "tomato", "bacon"];
@@ -221,16 +221,16 @@ export default class DeliveryScene extends Phaser.Scene {
 
   orderBag(bag, food){
     if (food == this.chicken){
-      this.order = "chicken";
-      if (this.foods.indexOf(this.order) != -1){
-        this.chicken.disableBody(true, true);
-        this.checkmark.setAlpha(1.0);
-        this.foodList.push("chicken");
-      }
+      this.eatFood(bag, food);
+    }
+    if (food == this.bacon){
+      this.eatFood(bag, food);
+    }
+    if (food == this.ham){
+      this.eatFood(bag, food);
+    }
       else{
-        this.chicken.setX(200);
-        this.chicken.setY(60);
-      }
+        this.resetFood(food);
     }
   }
 
