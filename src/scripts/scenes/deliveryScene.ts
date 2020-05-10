@@ -24,7 +24,9 @@ export default class DeliveryScene extends Phaser.Scene {
   private foodDragged: any;
   private order: any;
   private table: any;
-  private checkmark: any;
+  private checkmark1: any;
+  private checkmark2: any;
+  private checkmark3: any;
   private xmark: any;
   orderFoodText;
   cursorKeys;
@@ -56,9 +58,16 @@ export default class DeliveryScene extends Phaser.Scene {
     this.add.text(60,200, "bacon (tocino)",{fill:"#000000", fontSize:"35px"});
     this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
 
-    this.checkmark = this.add.image(60, 105, "checkmark");
-    this.checkmark.setScale(0.15);
-    this.checkmark.setAlpha(0.0);
+    this.checkmark1 = this.add.image(60, 105, "checkmark");
+    this.checkmark1.setScale(0.15);
+    this.checkmark1.setAlpha(0.0);
+    this.checkmark2 = this.add.image(60, 105, "checkmark");
+    this.checkmark2.setScale(0.15);
+    this.checkmark2.setAlpha(0.0);
+    this.checkmark3 = this.add.image(60, 105, "checkmark");
+    this.checkmark3.setScale(0.15);
+    this.checkmark3.setAlpha(0.0);
+
 
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
@@ -113,29 +122,29 @@ export default class DeliveryScene extends Phaser.Scene {
    
 
     // hard coded collisions
-    this.physics.add.collider(this.bag, this.tomato, this.eatFood, function(bag, tomato){
-      tomato.destroy(false);
-    }, this);
+     this.physics.add.collider(this.bag, this.tomato, this.orderBag, function(bag, tomato){
+       null;
+     }, this);
 
-    this.physics.add.overlap(this.bag, this.tomato, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.tomato, this.orderBag, undefined, this);
 
-    this.physics.add.collider(this.bag, this.chicken, this.eatFood, function(bag, chicken){
+    this.physics.add.collider(this.bag, this.chicken, this.orderBag, function(bag, chicken){
       chicken.destroy(true);
     }, this);
 
-    this.physics.add.overlap(this.bag, this.chicken, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.chicken, this.orderBag, undefined, this);
 
-    this.physics.add.collider(this.bag, this.ham, this.eatFood, function(bag, ham){
+    this.physics.add.collider(this.bag, this.ham, this.orderBag, function(bag, ham){
       ham.destroy(true);
     }, this);
 
-    this.physics.add.overlap(this.bag, this.ham, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.ham, this.orderBag, undefined, this);
 
-    this.physics.add.collider(this.bag, this.bacon, this.eatFood, function(bag, bacon){
+    this.physics.add.collider(this.bag, this.bacon, this.orderBag, function(bag, bacon){
       bacon.destroy(true);
     }, this);
 
-    this.physics.add.overlap(this.bag, this.bacon, this.eatFood, undefined, this);
+    this.physics.add.overlap(this.bag, this.bacon, this.orderBag, undefined, this);
 
     //testing a random function for order sheet
     this.orderFood = ["chicken", "ham", "tomato", "bacon"];
@@ -221,19 +230,25 @@ export default class DeliveryScene extends Phaser.Scene {
 
   orderBag(bag, food){
     if (food == this.chicken){
-        this.chicken.disableBody(true, true);
-        this.checkmark.setAlpha(1.0);
+      this.eatFood(bag, food);
+      this.checkmark1.x = 60;
+      this.checkmark1.y = 105;
+      this.checkmark1.setAlpha(1.0);
     }
-    else if( food == this.ham){
-      this.ham.disableBody(true, true);
-        this.checkmark.setAlpha(1.0);
+    if (food == this.bacon){
+      this.eatFood(bag, food);
+      this.checkmark2.x = 60;
+      this.checkmark2.y = 205;
+      this.checkmark2.setAlpha(1.0);
     }
-    else if(food == this.bacon){
-      this.bacon.disableBody(true, true);
-        this.checkmark.setAlpha(1.0);
+    if (food == this.ham){
+      this.eatFood(bag, food);
+      this.checkmark3.x = 60;
+      this.checkmark3.y = 155;
+      this.checkmark3.setAlpha(1.0);
     }
-    else{
-      this.resetFood(food);
+      else{
+        this.resetFood(food);
     }
   }
 
