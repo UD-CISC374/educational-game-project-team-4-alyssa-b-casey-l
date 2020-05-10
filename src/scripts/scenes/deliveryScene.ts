@@ -70,6 +70,7 @@ export default class DeliveryScene extends Phaser.Scene {
 
     this.score = 0;
     this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
+    this.scoreLabel.setTint("#000000");
 
     //Vegetables
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
@@ -162,10 +163,12 @@ export default class DeliveryScene extends Phaser.Scene {
 
     // pausing the game
     let pause = this.add.bitmapText(1600, 1500, "pixelFont", "PAUSE", 100);
+    pause.tint = 0x000000;
     pause.setInteractive({ useHandCursor: true });
     pause.on('pointerdown', () => this.pauseButton());
 
     let resume = this.add.bitmapText(1200, 1500, "pixelFont", "RESUME", 100);
+    resume.tint = 0x000000;
     resume.setInteractive({ useHandCursor: true });
     resume.on('pointerdown', () => this.resumeButton());
 
@@ -233,7 +236,7 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   orderBag(bag, food){
-
+ 
     // if (food == this.dictionary.english["chicken"].asTextureKey) {
     if (this.tempOrderFoodText.includes(this.dictionary.food.eText)) {
       this.eatFood(bag, food);
