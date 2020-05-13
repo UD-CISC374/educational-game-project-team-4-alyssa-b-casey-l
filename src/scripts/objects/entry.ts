@@ -4,14 +4,14 @@ export class Entry {
     asSpanish: string;
     asFrench: string;
     asTextureKey: string;
-    eText: string;
+
     // Appropriate constructor
-    constructor(e:string, s:string, f:string, t:string, et:string) {
+    constructor(e:string, s:string, f:string, t:string) {
         this.asEnglish = e;
         this.asSpanish = s;
         this.asFrench = f;
         this.asTextureKey = t;
-        this.eText = et;
+
     }
 
 }

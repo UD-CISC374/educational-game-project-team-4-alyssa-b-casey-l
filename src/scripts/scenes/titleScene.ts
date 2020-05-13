@@ -11,29 +11,40 @@ export default class TitleScene extends Phaser.Scene {
 
     preload(){
         this.load.image("title", "assets/images/orderScene.png");
-        this.load.image("instructions", "assets/images/instructions.png");
+        this.load.image("instructions", "assets/images/instructions.PNG");
         this.load.bitmapFont("pixelFont", "assets/font/font.png","assets/font/font.xml");
     }
 
     create(){
         let title = this.add.image(0,0,"title");
         title.setOrigin(0,0);
-        var text = this.add.text(100,100, 'Welcome To Our Game!',{fill:"#000000", fontSize:"100px"});
+        var text = this.add.text(100,100, 'ORDER UP!',{fill:"#000000", fontSize:"100px"});
 
-        //play button
-        let play = this.add.bitmapText(300, 300, "pixelFont", "PLAY", 100);
-        play.setInteractive({ useHandCursor: true });
-        play.on('pointerdown', () => this.clickButton());
+
 
         //instructions button
         this.instruction = this.add.bitmapText(500, 500, "pixelFont", "HOW TO PLAY", 100);
         this.instruction.setInteractive({ useHandCursor: true });
         this.instruction.on('pointerdown', () => this.instructionButton());
+        this.instruction.tint = 0x000000;
+
+
+        //play button
+        let play = this.add.bitmapText(300, 300, "pixelFont", "PLAY", 100);
+        play.tint = 0x000000;
+        play.setInteractive({ useHandCursor: true });
+        play.on('pointerdown', () => this.clickButton());
+
+        
 
     }
 
+    //  deleteIns(instruction){
+    //      instruction = this.instruction;
+    //      instruction.destroy;
+    //  }
     clickButton() {
-        this.instruction.destroy(); // trying to destroy the image once you hit play; doesn't work yet
+        this.instruction.destroy(true); // trying to destroy the image once you hit play; doesn't work yet
         this.scene.switch('PreloadScene');
     }
 

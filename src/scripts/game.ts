@@ -4,6 +4,7 @@ import PreloadScene from './scenes/preloadScene';
 import OrderScene from './scenes/orderScene';
 import TitleScene from './scenes/titleScene';
 import GameConfig = Phaser.Types.Core.GameConfig;
+import orderScene2 from './scenes/orderScene2';
 
 const DEFAULT_WIDTH = 2560;
 const DEFAULT_HEIGHT = 1600;
@@ -19,7 +20,7 @@ const config: GameConfig = {
         height: DEFAULT_HEIGHT
     },
 
-    scene: [TitleScene, PreloadScene, OrderScene, DeliveryScene],
+    scene: [TitleScene, PreloadScene, DeliveryScene, orderScene2],
     physics: {
         default: 'arcade',
         arcade: {

@@ -5,7 +5,7 @@ import { GameObjects } from 'phaser';
 import {Entry} from '../objects/entry';
 import {Dictionary} from '../objects/dictionary';
 
-export default class DeliveryScene extends Phaser.Scene {
+export default class orderScene2 extends Phaser.Scene {
   private deliveryscene;
   private orderscene;
   private tomato: food;
@@ -28,7 +28,6 @@ export default class DeliveryScene extends Phaser.Scene {
   private checkmark2: any;
   private checkmark3: any;
   private xmark: any;
-  orderComplete: boolean = false;
   orderFoodText;
   tempOrderFoodText;
   cursorKeys;
@@ -39,10 +38,9 @@ export default class DeliveryScene extends Phaser.Scene {
   orderFood: any;
   tomatoText: GameObjects.Text;
   dictionary;
-  fullList: any[];
 
   constructor() {
-    super({ key: 'DeliveryScene' });
+    super({ key: 'orderScene2' });
     
   }
 
@@ -175,7 +173,6 @@ export default class DeliveryScene extends Phaser.Scene {
     let resume = this.add.bitmapText(1200, 1500, "pixelFont", "RESUME", 100);
     resume.setInteractive({ useHandCursor: true });
     resume.on('pointerdown', () => this.resumeButton());
-    this.nextScene();
 
     
     //this.iterFoodText(this.orderFoodText, 3);
@@ -226,30 +223,24 @@ export default class DeliveryScene extends Phaser.Scene {
   }
 
   nextScene(){
-    if(this.orderComplete == true){
-      this.scene.start('orderScene2');
+    if(this.checkmark1 && this.checkmark2){
+      this.scene.switch('PreloadScene');
     }
   }
   //2 items: tomato, bacon
   orderBag(bag, food){
-    while(this.orderComplete == false){
+    
     if (food == this.tomato) {
       this.eatFood(bag, food);
       this.checkmark2.setVisible(true);
-      this.fullList.push(this.tomato);
     }
     if (food == this.bacon){
       this.eatFood(bag, food);
       this.checkmark1.setVisible(true);
-      this.fullList.push(this.bacon);
     }
     else{
       this.resetFood(food);
     }
-    if(this.fullList.length == 2){
-    this.orderComplete = true;
-    }
-  }
   }
 
   update() {
