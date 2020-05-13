@@ -79,6 +79,8 @@ export default class DeliveryScene extends Phaser.Scene {
     this.dictionary = new Dictionary();
     this.dictionary.addEntry("tomato", "tomate", "tomate", this.tomatoText);
 
+
+
     //Meats
     this.chicken = this.physics.add.image(this.scale.width / 50, this.scale.height / 2, "chicken").setInteractive();
     this.input.setDraggable(this.chicken);
