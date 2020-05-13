@@ -77,7 +77,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.input.setDraggable(this.tomato);
     this.tomatoText = this.add.text(0, 0, "tomato\n", {fill:"#000000", fontSize:"35px"}).setVisible(false);
     this.dictionary = new Dictionary();
-    this.dictionary.addEntry("tomato", "tomate", "tomate", this.tomatoText);
+    this.dictionary.addEntry("tomato", "tomate", "tomate", this.tomato, this.tomatoText);
 
 
 
@@ -90,12 +90,12 @@ export default class DeliveryScene extends Phaser.Scene {
     this.bacon = this.physics.add.image(this.scale.width / 3 - 50, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
     this.baconText = this.add.text(0, 0, "bacon\n", {fill:"#000000", fontSize:"35px"}).setVisible(false);
-    this.dictionary.addEntry("bacon", "tocino", "bacon", this.bacon);
+    this.dictionary.addEntry("bacon", "tocino", "bacon", this.bacon, this.baconText);
     this.ham = this.physics.add.image(this.scale.width / 2 - 50, this.scale.height / 2, "ham").setInteractive();
     this.input.setDraggable(this.ham);
     this.ham.setScale(0.5);
     this.hamText = this.add.text(0, 0, "ham\n", {fill:"#000000", fontSize:"35px"}).setVisible(false);
-    this.dictionary.addEntry("ham", "jamon", "jambon", "ham");
+    this.dictionary.addEntry("ham", "jamon", "jambon", this.ham,this.hamText);
 
     // dragging code
     this.input.dragDistanceThreshold = 16;
@@ -123,7 +123,8 @@ export default class DeliveryScene extends Phaser.Scene {
    
 
     // hard coded collisions
-     this.physics.add.collider(this.bag, this.tomato, this.orderBag as ArcadePhysicsCallback, function(bag, tomato){
+     this.physics.add.collider(this.bag, this.tomato, this.orderBag as ArcadePhysicsCallback, 
+      function(bag, tomato){
        null;
      }, this);
 
@@ -138,7 +139,8 @@ export default class DeliveryScene extends Phaser.Scene {
 
     this.physics.add.overlap(this.bag, this.chicken, this.orderBag as ArcadePhysicsCallback, undefined, this);
 
-    this.physics.add.collider(this.bag, this.ham, this.orderBag as ArcadePhysicsCallback, function(bag, ham){
+    this.physics.add.collider(this.bag, this.ham, this.orderBag as ArcadePhysicsCallback, 
+      function(bag, ham){
        null;
     }, this
     );
@@ -198,6 +200,7 @@ export default class DeliveryScene extends Phaser.Scene {
       arr[i].y = y;
       y += 50;
       arr[i].setVisible(true);
+      // somehow enter the text thats printed into the dictionary? or create a list to store the values printed?
     }
   }
 
@@ -237,24 +240,26 @@ export default class DeliveryScene extends Phaser.Scene {
     this.scoreLabel.text = "SCORE " + this.score;
   }
 
-  orderBag(bag, food){
- 
-    // if (food == this.dictionary.english["chicken"].asTextureKey) {
-    if (this.tempOrderFoodText.includes(this.dictionary.food.eText)) {
-      this.eatFood(bag, food);
-      //this.checkmark1.y = 105;
+  orderBag(bag, food, arr){
+    let flag: boolean = false;
+    arr = this.iterFoodText;
+    if (food == this.dictionary.english["chicken"].asTextureKey) {
+      //if (this.tempOrderFoodText.includes(this.dictionary.food.eText)) {
+          this.eatFood(bag, food);
+          this.checkmark1.y = 105;
+      //}
     }
-    // if (food == this.dictionary.english["bacon"].asTextureKey){
-    //   this.eatFood(bag, food);
-    //   //this.checkmark2.y = 205;
-    // }
-    // if (food == this.dictionary.english["ham"].asTextureKey){
-    //   this.eatFood(bag, food);
-    //   //this.checkmark3.y = 155;
-    // }
-    // if (food == this.dictionary.english["tomato"].asTextureKey){
-    //   this.eatFood(bag, food);
-    // }
+    if (food == this.dictionary.english["bacon"].asTextureKey){
+      this.eatFood(bag, food);
+      //this.checkmark2.y = 205;
+    }
+    if (food == this.dictionary.english["ham"].asTextureKey){
+      this.eatFood(bag, food);
+      //this.checkmark3.y = 155;
+    }
+    if (food == this.dictionary.english["tomato"].asTextureKey){
+      this.eatFood(bag, food);
+    }
     else{
       this.resetFood(food);
     }
