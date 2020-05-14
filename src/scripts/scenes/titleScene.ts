@@ -20,23 +20,19 @@ export default class TitleScene extends Phaser.Scene {
         title.setOrigin(0,0);
         var text = this.add.text(100,100, 'ORDER UP!',{fill:"#000000", fontSize:"100px"});
 
-
-
-        //instructions button
-        this.instruction = this.add.bitmapText(500, 500, "pixelFont", "HOW TO PLAY", 100);
-        this.instruction.setInteractive({ useHandCursor: true });
-        this.instruction.on('pointerdown', () => this.instructionButton());
-        this.instruction.tint = 0x000000;
-
-
         //play button
         let play = this.add.bitmapText(300, 300, "pixelFont", "PLAY", 100);
         play.tint = 0x000000;
         play.setInteractive({ useHandCursor: true });
         play.on('pointerdown', () => this.clickButton());
-
         
 
+        //instructions button
+        this.instruction = this.add.bitmapText(500, 500, "pixelFont", "HOW TO PLAY", 100);
+        this.instruction.tint = 0x000000;
+        this.instruction.setInteractive({ useHandCursor: true });
+        this.instruction.on('pointerdown', () => this.instructionButton());
+        
     }
 
     //  deleteIns(instruction){
@@ -44,7 +40,7 @@ export default class TitleScene extends Phaser.Scene {
     //      instruction.destroy;
     //  }
     clickButton() {
-        this.instruction.destroy(true); // trying to destroy the image once you hit play; doesn't work yet
+        this.instruction.setVisible(false); // trying to destroy the image once you hit play; doesn't work yet
         this.scene.switch('PreloadScene');
     }
 

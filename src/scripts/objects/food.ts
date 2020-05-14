@@ -1,5 +1,8 @@
 export default class Food extends Phaser.Physics.Arcade.Image {
 
+    //flag: boolean = false;
+
+
     constructor(scene,x,y, flag) {
         
         super(scene, x, y, "body", flag);
