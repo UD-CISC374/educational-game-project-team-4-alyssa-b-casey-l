@@ -35,6 +35,10 @@ export default class TitleScene extends Phaser.Scene {
         
     }
 
+    //  deleteIns(instruction){
+    //      instruction = this.instruction;
+    //      instruction.destroy;
+    //  }
     clickButton() {
         this.instruction.setVisible(false); // trying to destroy the image once you hit play; doesn't work yet
         this.scene.switch('PreloadScene');
