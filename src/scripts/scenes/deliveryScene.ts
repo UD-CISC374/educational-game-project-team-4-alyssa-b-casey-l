@@ -40,6 +40,7 @@ export default class DeliveryScene extends Phaser.Scene {
   tomatoText: GameObjects.Text;
   dictionary;
   fullList: any[];
+  completed;
 
   constructor() {
     super({ key: 'DeliveryScene' });
@@ -56,18 +57,16 @@ export default class DeliveryScene extends Phaser.Scene {
     this.bag = this.physics.add.image(this.scale.width / 2 - 900, this.scale.height / 2 + 400, "bag");
     this.paper = this.add.image(285, 300, "paper");
     this.paper.setScale(1.5);
-    this.add.text(50,50, "Order:",{fill:"#000000", fontSize:"40px"});
+    this.add.text(50,50, "Order: (Spanish)",{fill:"#000000", fontSize:"45px"});
     //this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,150, "tomato (tomate)",{fill:"#000000", fontSize:"35px"});
-    this.add.text(60,100, "bacon (tocino)",{fill:"#000000", fontSize:"35px"});
+    this.add.text(60,150, "tomato (tomate)",{fill:"#000000", fontSize:"40px"});
+    this.add.text(60,100, "bacon (tocino)",{fill:"#000000", fontSize:"40px"});
     this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
 
     this.checkmark1 = this.add.image(55, 105, "checkmark").setVisible(false);
     this.checkmark1.setScale(0.15);
     this.checkmark2 = this.add.image(55, 150, "checkmark").setVisible(false);
     this.checkmark2.setScale(0.15);
-    this.checkmark3 = this.add.image(60, 105, "checkmark").setVisible(false);
-    this.checkmark3.setScale(0.15);
 
 
     this.score = 0;
@@ -88,10 +87,7 @@ export default class DeliveryScene extends Phaser.Scene {
     this.input.setDraggable(this.chicken);
     this.chicken.setScale(0.5);
     this.dictionary.addEntry("chicken", "pollo", "poulette", this.chicken, this.chickenText);
-    //this.chickenText = this.add.text(0, 0, "chicken\n", {fill:"#000000", fontSize:"35px"}).setVisible(false);
-    
-    
-    
+    //this.chickenText = this.add.text(0, 0, "chicken\n", {fill:"#000000", fontSize:"35px"}).setVisible(false)
     this.bacon = this.physics.add.image(this.scale.width / 3 - 50, this.scale.height / 2, "bacon").setInteractive();
     this.input.setDraggable(this.bacon);
     this.baconText = this.add.text(0, 0, "bacon\n", {fill:"#000000", fontSize:"35px"}).setVisible(false);
@@ -167,28 +163,17 @@ export default class DeliveryScene extends Phaser.Scene {
 
 
     // pausing the game
-    let pause = this.add.bitmapText(1600, 1500, "pixelFont", "PAUSE", 100);
+    let pause = this.add.bitmapText(1600, 1500, "pixelFont", "RESTART", 100);
     pause.tint = 0x000000;
     pause.setInteractive({ useHandCursor: true });
     pause.on('pointerdown', () => this.pauseButton());
 
-    let resume = this.add.bitmapText(1200, 1500, "pixelFont", "RESUME", 100);
-    resume.tint = 0x000000;
-    resume.setInteractive({ useHandCursor: true });
-    resume.on('pointerdown', () => this.resumeButton());
-    this.nextScene();
 
-    
-    //this.iterFoodText(this.orderFoodText, 3);
 
   }
 
   pauseButton() {
-    this.scene.pause('DeliveryScene');
-  }
-
-  resumeButton() {
-    this.scene.resume('DeliveryScene');
+    this.scene.switch('TitleScene');
   }
 
   iterFoodText(arr, size){
@@ -262,6 +247,8 @@ export default class DeliveryScene extends Phaser.Scene {
     }
     if(this.score == 10){ //array.length returns one number higher than the highest index. for some reason
       // add an order complete image here before scene transition
+      this.completed = this.add.image(1300, 800, "complete");
+      this.completed.setScale(2);
       this.orderComplete = true;
       this.nextScene();
     }  

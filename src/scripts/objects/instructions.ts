@@ -1,8 +1,10 @@
 export default class Instructions extends Phaser.Scene {
     public instructions: any;
+    parent: any;
 
-    constructor(handle) {
+    constructor(handle,parent) {
         super(handle);
+        this.parent = parent;
       }
 
       preload(){
@@ -10,7 +12,20 @@ export default class Instructions extends Phaser.Scene {
       }
 
       create(){
-          this.instructions = this.add.image(1000,800,"instructions");
-          this.instructions.setScale(3);
+          this.instructions = this.physics.add.image(1300,800,"instructions");
+          this.instructions.setGravity(0);
+          this.instructions.setScale(2);
       }
+
+      refresh (){
+        this.cameras.main.setPosition(this.parent.x, this.parent.y);
+
+        this.scene.bringToTop();
+     }
+
+      /* instrDestroy(){
+          if(this.TitleScene.isVisible == true){
+
+          }
+      } */
 }

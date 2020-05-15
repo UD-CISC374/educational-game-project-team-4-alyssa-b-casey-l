@@ -3,6 +3,7 @@ import Instructions from '../objects/instructions';
 export default class TitleScene extends Phaser.Scene {
     private count: number;
     private instruction: any;
+    private instructions: Instructions;
 
     constructor() {
       super({ key: 'TitleScene' });
@@ -18,29 +19,26 @@ export default class TitleScene extends Phaser.Scene {
     create(){
         let title = this.add.image(0,0,"title");
         title.setOrigin(0,0);
-        var text = this.add.text(100,100, 'ORDER UP!',{fill:"#000000", fontSize:"100px"});
+        var text = this.add.bitmapText(1020,100, "pixelFont", "ORDER UP!", 150);
+        text.tint = 0x000000;
 
         //play button
-        let play = this.add.bitmapText(300, 300, "pixelFont", "PLAY", 100);
+        let play = this.add.bitmapText(1185, 300, "pixelFont", "PLAY", 100);
         play.tint = 0x000000;
         play.setInteractive({ useHandCursor: true });
         play.on('pointerdown', () => this.clickButton());
         
 
         //instructions button
-        this.instruction = this.add.bitmapText(500, 500, "pixelFont", "HOW TO PLAY", 100);
+        this.instruction = this.add.bitmapText(1050, 500, "pixelFont", "HOW TO PLAY", 100);
         this.instruction.tint = 0x000000;
         this.instruction.setInteractive({ useHandCursor: true });
         this.instruction.on('pointerdown', () => this.instructionButton());
         
     }
 
-    //  deleteIns(instruction){
-    //      instruction = this.instruction;
-    //      instruction.destroy;
-    //  }
     clickButton() {
-        this.instruction.setVisible(false); // trying to destroy the image once you hit play; doesn't work yet
+        //destroy(Instructions); // trying to destroy the image once you hit play; doesn't work yet
         this.scene.switch('PreloadScene');
     }
 
