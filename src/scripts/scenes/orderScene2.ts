@@ -255,7 +255,7 @@ export default class orderScene2 extends Phaser.Scene {
 
   nextScene(){
     if(this.orderComplete == true){
-      this.scene.switch('orderScene2');
+      this.scene.switch('orderScene');
     }
   }
 
