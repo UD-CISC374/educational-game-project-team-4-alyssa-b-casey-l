@@ -61,12 +61,10 @@ export default class orderScene2 extends Phaser.Scene {
     this.paper = this.add.image(285, 300, "paper");
     this.paper.setScale(1.5);
     this.add.text(50,50, "Order: (Spanish)",{fill:"#000000", fontSize:"45px"});
-    //this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"35px"});
     this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"40px"});
     this.add.text(60,150, "ham (jamon)",{fill:"#000000", fontSize:"40px"});
     this.add.text(60,200, "strawberry (fresa)",{fill:"#000000", fontSize:"40px"});
     this.add.text(60,250, "lettuce (lechuga)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
 
     this.checkmark1 = this.add.image(55, 100, "checkmark").setVisible(false);
     this.checkmark1.setScale(0.15);
@@ -255,7 +253,7 @@ export default class orderScene2 extends Phaser.Scene {
 
   nextScene(){
     if(this.orderComplete == true){
-      this.scene.switch('orderScene');
+      this.scene.switch('orderScene3');
     }
   }
 

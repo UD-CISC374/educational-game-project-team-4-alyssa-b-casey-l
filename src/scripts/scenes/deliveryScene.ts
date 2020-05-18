@@ -58,10 +58,8 @@ export default class DeliveryScene extends Phaser.Scene {
     this.paper = this.add.image(285, 300, "paper");
     this.paper.setScale(1.5);
     this.add.text(50,50, "Order: (Spanish)",{fill:"#000000", fontSize:"45px"});
-    //this.add.text(60,100, "chicken (pollo)",{fill:"#000000", fontSize:"35px"});
     this.add.text(60,150, "tomato (tomate)",{fill:"#000000", fontSize:"40px"});
     this.add.text(60,100, "bacon (tocino)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60, 400, "drag the food into\n the bag to\n fulfill the order", {fill:"#000000", fontSize:"40px"});
 
     this.checkmark1 = this.add.image(55, 105, "checkmark").setVisible(false);
     this.checkmark1.setScale(0.15);
