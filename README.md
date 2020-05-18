@@ -1,6 +1,6 @@
 # Order Up!
 
-by Alyssa Burks and Casey Ljuba
+An educational game by Alyssa Burks and Casey Ljuba
 
 ## About the game:
 
