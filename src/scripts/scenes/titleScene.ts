@@ -4,6 +4,7 @@ export default class TitleScene extends Phaser.Scene {
     private count: number;
     private instruction: any;
     private instructions: Instructions;
+    private instr;
 
     constructor() {
       super({ key: 'TitleScene' });
@@ -38,35 +39,14 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     clickButton() {
-        //destroy(Instructions); // trying to destroy the image once you hit play; doesn't work yet
+        this.instr.destroy(true);
         this.scene.switch('PreloadScene');
     }
 
     instructionButton(){
-        this.createWindow(Instructions);
+        //this.instr = this.add.image(1300,800,"instructions");
+        this.instr = this.add.bitmapText(680, 750, "pixelFont", "Read the customer's order in the top left corner,\nthen click and drag food into the delivery bag!", 80);
+        this.instr.tint = 0x000000;
     }
 
-    createWindow (func){ //from http://labs.phaser.io/edit.html?src=src%5Cscenes%5Cdrag%20scenes%20demo.js
-        var x = Phaser.Math.Between(400, 600);
-        var y = Phaser.Math.Between(64, 128);
-
-        var handle = 'window' + this.count++;
-
-        var win = this.add.zone(x, y, 472, 74).setInteractive().setOrigin(0);
-
-        var demo = new func(handle, win);
-
-        this.input.setDraggable(win);
-
-        win.on('drag', function (pointer, dragX, dragY) {
-
-            x = dragX;
-            y = dragY;
-
-            demo.refresh()
-
-        });
-
-        this.scene.add(handle, demo, true);
-    }
 }
