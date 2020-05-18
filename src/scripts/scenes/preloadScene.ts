@@ -47,10 +47,13 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("checkmark", "assets/images/checkmark.png");
     this.load.image("xmark", "assets/images/x.png");
 
+
+    //audio
+    this.load.audio("transition", ["assets/audio/transition.mp3", "assets/audio/transition.mp3"]);
+
   }
 
-  //this is a scene transition. make this into an if else statement in the orderScene
-  //
+  
   create() {
     this.scene.start('DeliveryScene');
   }
