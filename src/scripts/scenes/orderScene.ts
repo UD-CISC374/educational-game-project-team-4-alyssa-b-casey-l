@@ -50,6 +50,7 @@ export default class orderScene extends Phaser.Scene {
   checkmark4: GameObjects.Image;
   checkmark5: GameObjects.Image;
   checkmark6: GameObjects.Image;
+  transition;
 
   constructor() {
     super({ key: 'orderScene' });
@@ -94,6 +95,10 @@ export default class orderScene extends Phaser.Scene {
     this.score = 30;
     this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
     this.scoreLabel.setTint("#000000");
+    
+    //audio
+    this.transition = this.sound.add("transition");
+
 
     //Produce
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
@@ -323,6 +328,7 @@ export default class orderScene extends Phaser.Scene {
     }
     if(this.score == 60){ //array.length returns one number higher than the highest index. for some reason
       // add an order complete image here before scene transition
+      this.transition.play();
       this.completed = this.add.image(1300, 800, "complete");
       this.completed.setScale(2);
       this.orderComplete = true;
