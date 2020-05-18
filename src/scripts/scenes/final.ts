@@ -10,6 +10,7 @@ export default class Final extends Phaser.Scene {
     
       create() {
         this.final = this.add.image(0,0, "final");
+        this.final.setOrigin(0,0);
 
         this.score = 200;
         this.scoreLabel = this.add.bitmapText(1900, 1500, "pixelFont", "SCORE: 200", 100);
