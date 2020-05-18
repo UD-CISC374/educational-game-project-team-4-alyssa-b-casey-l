@@ -1,32 +1,13 @@
-# educational-phaser-game-template
+# Order Up!
 
-Template for designing educational Phaser Games
+by Alyssa Burks and Casey Ljuba
 
-# Important Files
+## About the game:
 
-These files are for coding your game:
+You are a despondent delivery driver working at a fast food restaurant where you have to prepare customer's orders and deliver them on your bike. Occasionally, customer's will give you orders in Spanish or French and it is your mission to deliver the best fast food experience possible. You will have to match food names to the appropriate item, and identify which language a word is in. This game is meant for 5th and 6th graders to introduce them to basic words in Spanish and French. Our game will have multiple levels, beginning with English, having the target language in parentheses, and transitioning to the target language with no English.
 
-* [src/scripts/game.ts](src/scripts/game.ts): The starting file of your game.
+## How to play:
 
-These files are for documenting your game:
- 
-* [egdd.md](egdd.md): The educational game design document describing this game in more depth.
+After reading the customer's order, you can click and drag the food into the delivery bag. Once you've completed the order, you're ready for the next round!
 
-These [package.json](package.json) settings are for configuring the metadata of your game and should be updated:
-
-* `name`: This must be a lower-case version of your repository name on GitHub, without spaces.
-* `description`: Give a quick, one sentence summary of your game.
-* `game`:
-    * `url`: Change this to be the EXACT name of your repository on GitHub.
-    * `shortName`: Choose a short name for your game for [Progressive Web App](https://medium.com/@amberleyjohanna/seriously-though-what-is-a-progressive-web-app-56130600a093) packaging.
-    * `name`: Choose a longer, complete name for your game.
-* `repository`:
-    * `url`: Change this URL to be a link to your GitHub repository.
-* `homepage`: Change this URL to be a link to the final version of your game's EGDD.
-* `contributors`: This should be an array (list) of strings, where each string is like `"Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)"`.
-
-You should edit the following images to create icons for your game, if it gets installed as a [Progressive Web App](https://medium.com/@amberleyjohanna/seriously-though-what-is-a-progressive-web-app-56130600a093):
-
-* [src/assets/icons/icons-192.png](src/assets/icons/icons-192.png): This is a 192x192 pixel version of your game's icon.
-* [src/assets/icons/icons-512.png](src/assets/icons/icons-512.png): This is a 512x512 pixel version of your game's icon.
-* [src/assets/icons/favicon.ico](src/assets/icons/favicon.ico): The [Favicon](https://en.wikipedia.org/wiki/Favicon) for your game.
+![screenshot](https://github.com/UD-CISC374/educational-game-project-team-4-alyssa-b-casey-l/blob/casey/src/assets/screenshots/large.PNG)
