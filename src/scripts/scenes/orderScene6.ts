@@ -5,7 +5,7 @@ import { GameObjects } from 'phaser';
 import {Entry} from '../objects/entry';
 import {Dictionary} from '../objects/dictionary';
 
-export default class orderScene3 extends Phaser.Scene {
+export default class orderScene6 extends Phaser.Scene {
   private deliveryscene;
   private orderscene;
   private tomato: food;
@@ -51,7 +51,7 @@ export default class orderScene3 extends Phaser.Scene {
   checkmark6: GameObjects.Image;
 
   constructor() {
-    super({ key: 'orderScene3' });
+    super({ key: 'orderScene6' });
     
   }
 
@@ -65,19 +65,13 @@ export default class orderScene3 extends Phaser.Scene {
     this.bag = this.physics.add.image(this.scale.width / 2 - 900, this.scale.height / 2 + 400, "bag");
     this.paper = this.add.image(285, 300, "paper");
     this.paper.setScale(1.5);
-    this.add.text(50,50, "Order: Spanish",{fill:"#000000", fontSize:"45px"});
-    this.add.text(60,100, "pollo",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,150, "jamon",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,200, "fresa",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,250, "lechuga",{fill:"#000000", fontSize:"40px"});
+    this.add.text(50,50, "Order: French",{fill:"#000000", fontSize:"45px"});
+    this.add.text(60,100, "fraise",{fill:"#000000", fontSize:"40px"});
+    this.add.text(60,150, "poulette",{fill:"#000000", fontSize:"40px"});
+    this.add.text(60,200, "jambon",{fill:"#000000", fontSize:"40px"});
+    this.add.text(60,250, "salade",{fill:"#000000", fontSize:"40px"});
     this.add.text(60,300, "tomate",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,350, "tocino",{fill:"#000000", fontSize:"40px"});
-    /* this.add.text(60,100, "apple (manzana)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,150, "ham (jamon)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,200, "tomate",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,250, "lettuce (lechuga)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,300, "water (agua)",{fill:"#000000", fontSize:"40px"});
-    this.add.text(60,350, "cheese (queso)",{fill:"#000000", fontSize:"40px"}); */
+    this.add.text(60,350, "bacon",{fill:"#000000", fontSize:"40px"});
 
     this.checkmark1 = this.add.image(55, 100, "checkmark").setVisible(false);
     this.checkmark1.setScale(0.15);
@@ -93,7 +87,7 @@ export default class orderScene3 extends Phaser.Scene {
     this.checkmark6.setScale(0.15);
 
 
-    this.score = 30;
+    this.score = 120;
     this.scoreLabel = this.add.bitmapText(2000, 1500, "pixelFont", "SCORE", 100);
     this.scoreLabel.setTint("#000000");
 
@@ -144,11 +138,6 @@ export default class orderScene3 extends Phaser.Scene {
     });
     
     this.orderDone = false;
-
-
-    let foodarr = [["chicken", "pollo", "poulet"], ["bacon", "tocino", "bacon"], ["ham", "jamon", "jambon"]];
-    let randFood = foodarr[Math.floor(Math.random() * 3)];
-
    
 
     // hard coded collisions
@@ -214,16 +203,6 @@ export default class orderScene3 extends Phaser.Scene {
    this.physics.add.overlap(this.bag, this.apple, this.orderBag, undefined, this);
 
 
-    //testing a random function for order sheet
-    //this.orderFood = [this.chicken, this.ham, this.tomato, this.bacon];
-    
-    //this.orderFoodText = [this.chickenText, this.baconText, this.hamText, this.tomatoText];
-
-  
-  
-
-
-
     // pausing the game
     let pause = this.add.bitmapText(1600, 1500, "pixelFont", "RESTART", 100);
     pause.tint = 0x000000;
@@ -254,20 +233,6 @@ export default class orderScene3 extends Phaser.Scene {
     }
   }
 
-  /* iterFoodImage(arr){
-    let x: number = 0;
-    let y: number = 0;
-    Phaser.Utils.Array.Shuffle(arr);
-    for(var i:number = 0; i <= arr.length; i++){
-      arr[i].this.physics.add.image.x = 0;
-      arr[i].this.physics.add.image.y = Phaser.Math.Between(800, 850);
-      this.moveFood(arr[i], 5);
-       if(arr[i].x == 50){
-         i++;
-       }
-    }
-  } */
-
   //moves food across screen
   moveFood(food, speed){
     food.x += speed;
@@ -292,40 +257,39 @@ export default class orderScene3 extends Phaser.Scene {
 
   nextScene(){
     if(this.orderComplete == true){
-      this.scene.switch('orderScene4');
+      this.scene.switch('orderScene7');
     }
   }
 
-  //2 items: tomato, bacon
   orderBag(bag, food){
-    if (food == this.chicken) {
+    if (food == this.strawberry) {
       this.eatFood(bag, food);
       this.checkmark1.setVisible(true);
     }
-    if (food == this.ham){
+    if (food == this.chicken){
       this.eatFood(bag, food);
       this.checkmark2.setVisible(true);
     }
-    if (food == this.strawberry) {
+    if (food == this.ham) {
       this.eatFood(bag, food);
       this.checkmark3.setVisible(true);
     }
-    if (food == this.lettuce){
-      this.eatFood(bag, food);
-      this.checkmark4.setVisible(true);
-    }
-    if (food == this.tomato){
+    if (food == this.lettuce) {
+        this.eatFood(bag, food);
+        this.checkmark4.setVisible(true);
+      }
+      if (food == this.tomato){
         this.eatFood(bag, food);
         this.checkmark5.setVisible(true);
       }
-      if (food == this.bacon){
+      if (food == this.bacon) {
         this.eatFood(bag, food);
         this.checkmark6.setVisible(true);
       }
     else{
       this.resetFood(food);
     }
-    if(this.score == 60){ //array.length returns one number higher than the highest index. for some reason
+    if(this.score == 150){ //array.length returns one number higher than the highest index. for some reason
       // add an order complete image here before scene transition
       this.completed = this.add.image(1300, 800, "complete");
       this.completed.setScale(2);

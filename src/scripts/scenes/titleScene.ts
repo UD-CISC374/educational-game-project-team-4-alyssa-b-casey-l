@@ -39,8 +39,9 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     clickButton() {
-        this.instr.destroy(true);
+        
         this.scene.switch('PreloadScene');
+        this.instr.destroy(true);
     }
 
     instructionButton(){
