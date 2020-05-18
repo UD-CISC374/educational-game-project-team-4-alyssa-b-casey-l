@@ -12,6 +12,7 @@ import orderScene6 from './scenes/orderScene6';
 import orderScene7 from './scenes/orderScene7';
 import orderScene8 from './scenes/orderScene8';
 import orderScene9 from './scenes/orderScene9';
+import final from './scenes/final';
 
 const DEFAULT_WIDTH = 2560;
 const DEFAULT_HEIGHT = 1600;
@@ -27,8 +28,8 @@ const config: GameConfig = {
         height: DEFAULT_HEIGHT
     },
 
-    scene: [TitleScene, PreloadScene, DeliveryScene, orderScene2, OrderScene, orderScene3, 
-        orderScene4, orderScene5, orderScene6, orderScene7, orderScene8, orderScene9],
+    scene: [TitleScene, PreloadScene, DeliveryScene, orderScene2, orderScene3, 
+        orderScene4, orderScene5, orderScene6, orderScene7, orderScene8, orderScene9, final],
     physics: {
         default: 'arcade',
         arcade: {
