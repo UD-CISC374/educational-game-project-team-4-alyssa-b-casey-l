@@ -1,6 +1,6 @@
 # Order Up!
 
-An educational game by Alyssa Burks and Casey Ljuba
+An educational game by Alyssa Burks and Casey Ljuba for CISC374 Spring 2020
 
 ## About the game:
 
