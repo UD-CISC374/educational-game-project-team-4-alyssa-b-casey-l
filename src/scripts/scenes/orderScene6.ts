@@ -50,6 +50,8 @@ export default class orderScene6 extends Phaser.Scene {
   checkmark5: GameObjects.Image;
   checkmark6: GameObjects.Image;
   transition;
+  correct;
+  incorrect;
 
   constructor() {
     super({ key: 'orderScene6' });
@@ -94,6 +96,8 @@ export default class orderScene6 extends Phaser.Scene {
 
     //audio
     this.transition = this.sound.add("transition");
+    this.correct = this.sound.add("correct");
+    this.incorrect = this.sound.add("incorrect");
 
     //Produce
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
@@ -268,26 +272,32 @@ export default class orderScene6 extends Phaser.Scene {
   orderBag(bag, food){
     if (food == this.strawberry) {
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark1.setVisible(true);
     }
     if (food == this.chicken){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark2.setVisible(true);
     }
     if (food == this.ham) {
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark3.setVisible(true);
     }
     if (food == this.lettuce) {
         this.eatFood(bag, food);
+        this.correct.play();
         this.checkmark4.setVisible(true);
       }
       if (food == this.tomato){
         this.eatFood(bag, food);
+        this.correct.play();
         this.checkmark5.setVisible(true);
       }
       if (food == this.bacon) {
         this.eatFood(bag, food);
+        this.correct.play();
         this.checkmark6.setVisible(true);
       }
     else{

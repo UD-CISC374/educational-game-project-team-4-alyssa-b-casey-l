@@ -42,6 +42,8 @@ export default class DeliveryScene extends Phaser.Scene {
   dictionary;
   fullList: any[];
   completed;
+  correct;
+  incorrect;
 
   constructor() {
     super({ key: 'DeliveryScene' });
@@ -75,6 +77,8 @@ export default class DeliveryScene extends Phaser.Scene {
     //audio
 
     this.transition = this.sound.add("transition");
+    this.correct = this.sound.add("correct");
+    this.incorrect = this.sound.add("incorrect");
 
     //Vegetables
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
@@ -118,13 +122,6 @@ export default class DeliveryScene extends Phaser.Scene {
       gameObject.clearTint();
     });
     
-    this.orderDone = false;
-
-
-    let foodarr = [["chicken", "pollo", "poulet"], ["bacon", "tocino", "bacon"], ["ham", "jamon", "jambon"]];
-    let randFood = foodarr[Math.floor(Math.random() * 3)];
-
-   
 
     // hard coded collisions
      this.physics.add.collider(this.bag, this.tomato, this.orderBag, function(bag, tomato){
@@ -155,17 +152,7 @@ export default class DeliveryScene extends Phaser.Scene {
 
     this.physics.add.overlap(this.bag, this.bacon, this.orderBag, undefined, this);
 
-    //testing a random function for order sheet
-    //this.orderFood = [this.chicken, this.ham, this.tomato, this.bacon];
-    
-    //this.orderFoodText = [this.chickenText, this.baconText, this.hamText, this.tomatoText];
-
-  
-  
-
-
-
-    // pausing the game
+    // restarting the game
     let pause = this.add.bitmapText(1600, 1500, "pixelFont", "RESTART", 100);
     pause.tint = 0x000000;
     pause.setInteractive({ useHandCursor: true });
@@ -192,20 +179,6 @@ export default class DeliveryScene extends Phaser.Scene {
       // somehow enter the text thats printed into the dictionary? or create a list to store the values printed?
     }
   }
-
-  /* iterFoodImage(arr){
-    let x: number = 0;
-    let y: number = 0;
-    Phaser.Utils.Array.Shuffle(arr);
-    for(var i:number = 0; i <= arr.length; i++){
-      arr[i].this.physics.add.image.x = 0;
-      arr[i].this.physics.add.image.y = Phaser.Math.Between(800, 850);
-      this.moveFood(arr[i], 5);
-       if(arr[i].x == 50){
-         i++;
-       }
-    }
-  } */
 
   //moves food across screen
   moveFood(food, speed){
@@ -239,10 +212,12 @@ export default class DeliveryScene extends Phaser.Scene {
   orderBag(bag, food){
     if (food == this.tomato) {
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark2.setVisible(true);
     }
     if (food == this.bacon){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark1.setVisible(true);
     }
     else{
