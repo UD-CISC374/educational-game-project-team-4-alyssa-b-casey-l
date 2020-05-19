@@ -49,6 +49,8 @@ export default class orderScene4 extends Phaser.Scene {
   checkmark4: GameObjects.Image;
   checkmark5: GameObjects.Image;
   checkmark6: GameObjects.Image;
+  correct;
+  incorrect;
   transition;
 
   constructor() {
@@ -85,6 +87,8 @@ export default class orderScene4 extends Phaser.Scene {
 
     //audio
     this.transition = this.sound.add("transition");
+    this.correct = this.sound.add("correct");
+    this.incorrect = this.sound.add("incorrect");
 
     //Produce
     this.tomato = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "tomato").setInteractive();
@@ -243,20 +247,6 @@ export default class orderScene4 extends Phaser.Scene {
     }
   }
 
-  /* iterFoodImage(arr){
-    let x: number = 0;
-    let y: number = 0;
-    Phaser.Utils.Array.Shuffle(arr);
-    for(var i:number = 0; i <= arr.length; i++){
-      arr[i].this.physics.add.image.x = 0;
-      arr[i].this.physics.add.image.y = Phaser.Math.Between(800, 850);
-      this.moveFood(arr[i], 5);
-       if(arr[i].x == 50){
-         i++;
-       }
-    }
-  } */
-
   //moves food across screen
   moveFood(food, speed){
     food.x += speed;
@@ -289,14 +279,17 @@ export default class orderScene4 extends Phaser.Scene {
   orderBag(bag, food){
     if (food == this.bacon) {
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark1.setVisible(true);
     }
     if (food == this.tomato){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark2.setVisible(true);
     }
     if (food == this.lettuce) {
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark3.setVisible(true);
     }
     else{

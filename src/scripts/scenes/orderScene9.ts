@@ -54,6 +54,8 @@ export default class orderScene9 extends Phaser.Scene {
   checkmark7: GameObjects.Image;
   checkmark8: GameObjects.Image;
   transition;
+  correct;
+  incorrect;
 
   constructor() {
     super({ key: 'orderScene9' });
@@ -104,6 +106,8 @@ export default class orderScene9 extends Phaser.Scene {
 
     //audio
     this.transition = this.sound.add("transition");
+    this.correct = this.sound.add("correct");
+    this.incorrect = this.sound.add("incorrect");
 
     //Produce
     this.carrot = this.physics.add.image(this.scale.width / 4 - 50, this.scale.height / 2, "carrot").setInteractive();
@@ -297,38 +301,49 @@ export default class orderScene9 extends Phaser.Scene {
   orderBag(bag, food){
     if (food == this.coffee) {
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark1.setVisible(true);
     }
     if (food == this.pineapple){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark2.setVisible(true);
     }
     if (food == this.watermelon) {
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark3.setVisible(true);
     }
     if (food == this.lettuce){
         this.eatFood(bag, food);
+        this.correct.play();
         this.checkmark4.setVisible(true);
     }
     if (food == this.cheese){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark5.setVisible(true);
     }
     if (food == this.water){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark6.setVisible(true);
     }
     if (food == this.soda){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark7.setVisible(true);
     }
     if (food == this.apple){
       this.eatFood(bag, food);
+      this.correct.play();
       this.checkmark8.setVisible(true);
     }
     else{
+      //this.xmark = this.add.image(1300,800,"xmark");
+      //this.xmark.destroy(true);
       this.resetFood(food);
+      //this.incorrect.play();
     }
     if(this.score == 200){ //array.length returns one number higher than the highest index. for some reason
       // add an order complete image here before scene transition

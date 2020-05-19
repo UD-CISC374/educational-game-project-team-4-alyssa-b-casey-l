@@ -5,6 +5,7 @@ export default class TitleScene extends Phaser.Scene {
     private instruction: any;
     private instructions: Instructions;
     private instr;
+    backgroundMusic;
 
     constructor() {
       super({ key: 'TitleScene' });
@@ -15,6 +16,7 @@ export default class TitleScene extends Phaser.Scene {
         this.load.image("title", "assets/images/orderScene.png");
         this.load.image("instructions", "assets/images/instructions.PNG");
         this.load.bitmapFont("pixelFont", "assets/font/font.png","assets/font/font.xml");
+        this.load.audio("background", ["assets/audio/background.mp3", "assets/audio/background.mp3"]);
     }
 
     create(){
@@ -35,6 +37,11 @@ export default class TitleScene extends Phaser.Scene {
         this.instruction.tint = 0x000000;
         this.instruction.setInteractive({ useHandCursor: true });
         this.instruction.on('pointerdown', () => this.instructionButton());
+
+        //audio
+        this.backgroundMusic = this.sound.add("background",{ volume: 0.1, loop: true });
+        this.backgroundMusic.play();
+
         
     }
 

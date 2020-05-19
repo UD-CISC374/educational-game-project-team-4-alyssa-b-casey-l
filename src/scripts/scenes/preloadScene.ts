@@ -50,8 +50,11 @@ export default class PreloadScene extends Phaser.Scene {
 
 
     //audio
+    this.load.audio("background", ["assets/audio/background.mp3", "assets/audio/background.mp3"]);
     this.load.audio("transition", ["assets/audio/transition.mp3", "assets/audio/transition.mp3"]);
-
+    this.load.audio("correct", ["assets/audio/correct.mp3", "assets/audio/correct.mp3"]);
+    this.load.audio("incorrect", ["assets/audio/incorrect.mp3", "assets/audio/incorrect.mp3"]);
+    this.load.audio("end", ["assets/audio/end.mp3", "assets/audio/end.mp3"]);
   }
 
   
