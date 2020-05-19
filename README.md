@@ -10,4 +10,6 @@ You are a despondent delivery driver working at a fast food restaurant where you
 
 After reading the customer's order, you can click and drag the food into the delivery bag. Once you've completed the order, you're ready for the next round!
 
+[Gameplay video](https://www.youtube.com/watch?v=j_m98ppIBzA)
+
 ![screenshot](https://github.com/UD-CISC374/educational-game-project-team-4-alyssa-b-casey-l/blob/casey/src/assets/screenshots/large.PNG)
