@@ -222,6 +222,7 @@ export default class DeliveryScene extends Phaser.Scene {
     }
     else{
       this.resetFood(food);
+      //this.incorrect.play();
     }
     if(this.score == 10){ //array.length returns one number higher than the highest index. for some reason
       // add an order complete image here before scene transition
