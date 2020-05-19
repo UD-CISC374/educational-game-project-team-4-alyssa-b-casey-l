@@ -13,7 +13,7 @@ export default class Final extends Phaser.Scene {
         this.final = this.add.image(0,0, "final");
         this.final.setOrigin(0,0);
 
-        this.music = this.sound.add("end");
+        this.music = this.sound.add("end", {volume: 0.5, loop: false});
         this.music.play();
 
         this.score = 200;
